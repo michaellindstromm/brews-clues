@@ -1,11 +1,23 @@
 {
-  "name": "beer-me",
-  "version": "0.0.1",
-  "description": "An Ionic project",
-  "devDependencies": {
-    "gulp": "^3.5.6",
-    "gulp-clean-css": "^3.7.0",
-    "gulp-rename": "^1.2.0",
-    "gulp-sass": "^3.1.0"
-  }
+    "name": "beer-me",
+    "version": "0.0.1",
+    "description": "An Ionic project",
+    "devDependencies": {
+        "gulp": "^3.5.6",
+        "gulp-clean-css": "^3.7.0",
+        "gulp-rename": "^1.2.0",
+        "gulp-sass": "^3.1.0"
+    },
+    "dependencies": {
+        "cordova-plugin-camera": "^2.4.1",
+        "cordova-plugin-file": "^4.3.3",
+        "cordova-plugin-file-transfer": "^1.6.3"
+    },
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-camera": {},
+            "cordova-plugin-file": {},
+            "cordova-plugin-file-transfer": {}
+        }
+    }
 }
