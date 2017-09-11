@@ -1,1 +1,16 @@
 /* Empty. Add your own CSS if you like */
+
+.button-energized {
+    display: block;
+    margin: 4rem auto;
+}
+
+img {
+    margin-left: auto;
+    width: 500px;
+    height: 500px;
+}
+
+.imageDiv {
+    margin: 2rem auto;
+}
