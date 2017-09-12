@@ -29,6 +29,7 @@ let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
   
   angular.module('beer').run(function($ionicPlatform, $rootScope, $state, AuthService, FirebaseService) {
     $ionicPlatform.ready(function() {
+
       
       FirebaseService.initializeFirebase();
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
