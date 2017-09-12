@@ -1,8 +1,10 @@
 
 
-let CameraController = function ($scope, $window, $timeout, $cordovaQRScanner, $cordovaCamera, BeerService) {
+let CameraController = function ($scope, $window, $timeout, $cordovaBarcodeScanner, $cordovaCamera, BeerService) {
     
-    console.log("qr", $cordovaQRScanner);
+    // console.log("qr", QRScanner);
+
+    console.log("barCode", $cordovaBarcodeScanner);
 
     $scope.beerSearch = function() {
         BeerService.beerDBTest()
@@ -106,7 +108,13 @@ let CameraController = function ($scope, $window, $timeout, $cordovaQRScanner, $
         //     // error
         // });
 
-        QRScanner.scan(doSomething);
+        $cordovaBarcodeScanner.scan()
+        .then((data) => {
+            console.log("data", data);
+        })
+        .catch((error) => {
+            console.log("error", error);
+        });
     };
 
     

@@ -27,10 +27,11 @@ let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
 
   });
   
-  angular.module('beer').run(function($ionicPlatform, $rootScope, $state, $cordovaGooglePlus, AuthService, FirebaseService) {
+  angular.module('beer').run(function($ionicPlatform, $rootScope, $state, AuthService, FirebaseService) {
     $ionicPlatform.ready(function() {
 
-      
+      // console.log("qrscanner", QRScanner);
+
       FirebaseService.initializeFirebase();
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -44,11 +45,6 @@ let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
         StatusBar.styleDefault();
       }
 
-      if ($cordovaGooglePlus) {
-        console.log("available");
-      } else {
-        console.log("switch to email and pass");
-      }
 
   });
 })

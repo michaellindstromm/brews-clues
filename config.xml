@@ -90,4 +90,5 @@
     <plugin name="cordova-plugin-googleplus" spec="^5.1.1">
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.24755791061-n0nj1jtmjbmof33m146skqgjku3pcdbs" />
     </plugin>
+    <plugin name="phonegap-plugin-barcodescanner" spec="https://github.com/phonegap/phonegap-plugin-barcodescanner.git" />
 </widget>
