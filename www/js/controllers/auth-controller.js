@@ -1,6 +1,6 @@
-let AuthController = function($cordovaGooglePlus, AuthService, $scope, $window) {
+let AuthController = function($cordovaOauth, AuthService, $scope, $window) {
 
-    console.log("googleplus", $cordovaGooglePlus);
+    console.log("cordovaOauth", $cordovaOauth);
 
     $scope.login = '';
 
@@ -9,22 +9,20 @@ let AuthController = function($cordovaGooglePlus, AuthService, $scope, $window) 
     console.log("currentUser", currentUser);
     
     $scope.login = function() {
-        $cordovaGooglePlus.login(
-            {
-                'webClientId': '24755791061-tn51l2juoa9hco7osf91ts3slatj29b4.apps.googleusercontent.com'
-            },
-            function(userData) {
-                console.log("userdata", userData);
-            }
-        );
+        $cordovaOauth.google(AuthService.getClientID(), ["email"])
+        .then((result) => {
+            console.log("Response Object -> " + JSON.stringify(result));
+        }) 
+        .catch((error) => {
+            console.log("Error -> " + error);
+        });
 
-
+    };
 
         // AuthService.loginWithGoogle()
         // .then((result) => {
         //     console.log("result", result);
         // });
-    };
 
 };
 

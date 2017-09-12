@@ -29,8 +29,12 @@ let AuthService = function($q, $http) {
         return firebase.auth().signInWithPopup(google);
     };
 
+    const getClientID = function() {
+        return googleClientID;
+    }
 
-    return { getCurrentUser, isAuthenticated, loginWithGoogle }
+
+    return { getCurrentUser, isAuthenticated, loginWithGoogle, getClientID }
 }
 
 angular.module('beer').factory('AuthService', AuthService);
