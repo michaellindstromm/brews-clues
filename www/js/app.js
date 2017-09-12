@@ -50,11 +50,11 @@ let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-  .state('login', {
-    url: '/login',
-    templateUrl: '../templates/auth.html',
-    controller: 'AuthController'
-  })
+  // .state('login', {
+  //   url: '/login',
+  //   templateUrl: '../templates/auth.html',
+  //   controller: 'AuthController'
+  // })
   .state('app', {
     url: '/app',
     abstract: true,
@@ -113,5 +113,5 @@ let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/app/brews/suggestions');
 });
