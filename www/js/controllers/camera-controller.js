@@ -1,4 +1,8 @@
-let CameraController = function ($scope, $window, $timeout, $cordovaCamera, BeerService) {
+
+
+let CameraController = function ($scope, $window, $timeout, $cordovaQRScanner, $cordovaCamera, BeerService) {
+    
+    console.log("qr", $cordovaQRScanner);
 
     $scope.beerSearch = function() {
         BeerService.beerDBTest()
@@ -82,26 +86,30 @@ let CameraController = function ($scope, $window, $timeout, $cordovaCamera, Beer
 
     // $scope.beerSearch();
     $scope.scan = function() {
-        var options = {
-            quality: 50,
-            destinationType: Camera.DestinationType.DATA_URL,
-            sourceType: Camera.PictureSourceType.CAMERA,
-            allowEdit: true,
-            encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 100,
-            targetHeight: 100,
-            popoverOptions: CameraPopoverOptions,
-            saveToPhotoAlbum: false,
-            correctOrientation: true
-        };
+        // var options = {
+        //     quality: 50,
+        //     destinationType: Camera.DestinationType.DATA_URL,
+        //     sourceType: Camera.PictureSourceType.CAMERA,
+        //     allowEdit: true,
+        //     encodingType: Camera.EncodingType.JPEG,
+        //     targetWidth: 100,
+        //     targetHeight: 100,
+        //     popoverOptions: CameraPopoverOptions,
+        //     saveToPhotoAlbum: false,
+        //     correctOrientation: true
+        // };
 
-        $cordovaCamera.getPicture(options).then(function (imageData) {
-            var image = document.getElementById('myImage');
-            image.src = "data:image/jpeg;base64," + imageData;
-        }, function (err) {
-            // error
-        });
+        // $cordovaCamera.getPicture(options).then(function (imageData) {
+        //     var image = document.getElementById('myImage');
+        //     image.src = "data:image/jpeg;base64," + imageData;
+        // }, function (err) {
+        //     // error
+        // });
+
+        QRScanner.scan(doSomething);
     };
+
+    
 
 };
 
