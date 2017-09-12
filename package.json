@@ -21,7 +21,9 @@
             "cordova-plugin-file": {},
             "cordova-plugin-file-transfer": {},
             "cordova-plugin-qrscanner": {},
-            "cordova-plugin-googleplus": {}
+            "cordova-plugin-googleplus": {
+                "REVERSED_CLIENT_ID": "com.googleusercontent.apps.24755791061-n0nj1jtmjbmof33m146skqgjku3pcdbs"
+            }
         }
     }
 }

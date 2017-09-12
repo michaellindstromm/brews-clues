@@ -27,7 +27,7 @@ let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
 
   });
   
-  angular.module('beer').run(function($ionicPlatform, $rootScope, $state, AuthService, FirebaseService) {
+  angular.module('beer').run(function($ionicPlatform, $rootScope, $state, $cordovaGooglePlus, AuthService, FirebaseService) {
     $ionicPlatform.ready(function() {
 
       
@@ -42,6 +42,12 @@ let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
       if (window.StatusBar) {
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
+      }
+
+      if ($cordovaGooglePlus) {
+        console.log("available");
+      } else {
+        console.log("switch to email and pass");
       }
 
   });
