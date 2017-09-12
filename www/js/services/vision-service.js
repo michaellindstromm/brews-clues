@@ -1,9 +1,9 @@
-let VisionService = function($http, $q, VisionKey) {
+let VisionService = function($http, $q) {
 
-    const getVisionKey = function() {
-        let apiKey = VisionKey.getVisionKey();
-        return apiKey;
-    }
+    // const getVisionKey = function() {
+    //     let apiKey = VisionKey.getVisionKey();
+    //     return apiKey;
+    // }
 
     const getTextFromImage = function(json) {
         return $http.post(`https://vision.googleapis.com/v1/images:annotate?key=${getVisionKey()}`, json)
