@@ -5,12 +5,9 @@
     margin: 4rem auto;
 }
 
-img {
-    margin-left: auto;
-    width: 500px;
-    height: 500px;
-}
-
-.imageDiv {
+input {
+    display: block;
     margin: 2rem auto;
+    border-bottom: 1px solid #30CBBA !important;
+    text-align: center;
 }

@@ -4,70 +4,113 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('beer', ['ionic', 'ngCordova'])
+angular.module('beer', ['ionic', 'ngCordova']);
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
+let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
 
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
+  AuthService.isAuthenticated()
+    .then((userExists) => {
+
+      if (userExists) {
+
+        console.log("true");
+        resolve();
+
+      } else {
+
+        console.log("false");
+        reject();
+
+      }
+
+    });
+
+  });
+  
+  angular.module('beer').run(function($ionicPlatform, $rootScope, $state, AuthService, FirebaseService) {
+    $ionicPlatform.ready(function() {
+      
+      FirebaseService.initializeFirebase();
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
+      if (window.cordova && window.cordova.plugins.Keyboard) {
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        cordova.plugins.Keyboard.disableScroll(true);
+        
+      }
+      if (window.StatusBar) {
+        // org.apache.cordova.statusbar required
+        StatusBar.styleDefault();
+      }
+
   });
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('app', {
+  .state('login', {
+    url: '/login',
+    templateUrl: 'templates/auth.html',
+    controller: 'AuthController'
+  })
+  .state('app', {
     url: '/app',
     abstract: true,
-    templateUrl: 'templates/menu.html',
+    templateUrl: 'templates/side-menu.html',
     controller: 'SideMenuController'
   })
-
-  .state('app.search', {
-    url: '/search',
+  // .state('app.login', {
+  //   url: '/login',
+  //   views: {
+  //     templateUrl: 'templates/auth.html',
+  //     controller: 'AuthController'
+  //   }
+  // })
+  .state('app.camera', {
+    url: '/camera',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/camera.html',
+        controller: 'CameraController'
       }
     }
   })
-
-  .state('app.browse', {
-      url: '/browse',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/browse.html'
-        }
-      }
-    })
-    .state('app.playlists', {
-      url: '/playlists',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlayListsController'
-        }
-      }
-    })
-
-  .state('app.single', {
-    url: '/playlists/:playlistId',
+  .state('app.brews', {
+    url: '/brews',
     views: {
-      'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'SinglePlayListController'
+      'menuContent': { 
+        templateUrl: 'templates/tabs-menu.html'
+      }
+    }
+  })
+  .state('app.brews.suggestions', {
+    url: '/suggestions',
+    views: {
+      'tab-suggestions': {
+        templateUrl: 'templates/suggestions.html',
+        controller: 'SuggestionsController'
+      }
+    }
+  })
+  .state('app.brews.myBeers', {
+    url: '/myBeers',
+    views: {
+      'tab-myBeers': {
+        templateUrl: 'templates/my-beers.html',
+        controller: 'MyBeersController'
+      }
+    }
+  })
+  .state('app.brews.addBeer', {
+    url: '/addBeer',
+    views: {
+      'tab-addBeer': {
+        templateUrl: 'templates/add-beer.html',
+        controller: 'AddBeerController'
       }
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/login');
 });

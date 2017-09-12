@@ -5,8 +5,8 @@ let BeerService = function ($http, BeerKey) {
         return apiKey;
     }
 
-    const beerDBTest = function() {
-        return $http.get(`http://api.brewerydb.com/v2/search?q=Goosinator&type=beer&key=${getBeerKey()}`)
+    const getBeersBySearch = function(search) {
+        return $http.get(`http://api.brewerydb.com/v2/search?q=${search}&type=beer&key=${getBeerKey()}`)
         .then((response) => {
             return response;
         })
@@ -15,7 +15,18 @@ let BeerService = function ($http, BeerKey) {
         });
     };
 
-    return { beerDBTest };
+    const getAllBeers = function(ids) {
+        return $http.get(`http://api.brewerydb.com/v2/beers/?ids=${ids}&key=${getBeerKey()}`)
+            .then((response) => {
+                console.log("response", response);
+                return response;
+            })
+            .catch((error) => {
+                console.log("error", error);
+            });
+    }
+
+    return { getBeersBySearch, getAllBeers };
 
 };
 

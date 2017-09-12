@@ -11,13 +11,17 @@
     "dependencies": {
         "cordova-plugin-camera": "^2.4.1",
         "cordova-plugin-file": "^4.3.3",
-        "cordova-plugin-file-transfer": "^1.6.3"
+        "cordova-plugin-file-transfer": "^1.6.3",
+        "cordova-plugin-googleplus": "^5.1.1",
+        "cordova-plugin-qrscanner": "^2.5.0"
     },
     "cordova": {
         "plugins": {
             "cordova-plugin-camera": {},
             "cordova-plugin-file": {},
-            "cordova-plugin-file-transfer": {}
+            "cordova-plugin-file-transfer": {},
+            "cordova-plugin-qrscanner": {},
+            "cordova-plugin-googleplus": {}
         }
     }
 }
