@@ -115,10 +115,12 @@ let CameraController = function ($scope, $window, $timeout, $cordovaBarcodeScann
         $cordovaBarcodeScanner.scan()
         .then((data) => {
             console.log("data", data);
+            let beers = data.text.split('\n');
+            console.log("beers: ", beers);
 
-            FirebaseService.pushTextToFirebase(data);
-
-            // $('#displayText').text(data.text);
+            $(beers).each((index, item) => {
+                $('#displayText').append(item + '<br>');
+            });
         })
         .catch((error) => {
             console.log("error", error);
@@ -126,9 +128,18 @@ let CameraController = function ($scope, $window, $timeout, $cordovaBarcodeScann
     };
 
     $scope.testPush = function() {
-        let data = {data: 'hello'}
+        let data = { text: "Sam Adams\nBudweiser\nDogfish Head IPA\nLagunitas IPA\nYazoo Dos Perros"};
         console.log('controller', data);
         FirebaseService.pushTextToFirebase(data);
+    }
+
+    $scope.testTextManipulation = function() {
+        let data = { text: "Sam Adams\nBudweiser\nDogfish Head IPA\nLagunitas IPA\nYazoo Dos Perros" };
+        let beers = data.text.split('\n');
+        console.log("beers: ", beers);
+        $(beers).each((index, item) => {
+            $('#displayText').append(item + '<br>');
+        });
     }
     
 
