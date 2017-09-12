@@ -113,7 +113,7 @@ let CameraController = function ($scope, $window, $timeout, $cordovaBarcodeScann
         $cordovaBarcodeScanner.scan()
         .then((data) => {
             console.log("data", data);
-            $('#displayText').text(data);
+            $('#displayText').text(data.data);
         })
         .catch((error) => {
             console.log("error", error);
