@@ -7,13 +7,17 @@ let FirebaseService = function ($http, FireKey) {
     };
 
     let pushTextToFirebase = function(data) {
-        $http.post('https://brews-clues-a07a1.firebaseio.com/', data) 
+        console.log('service', data);
+        $http.post('https://brews-clues-a07a1.firebaseio.com/.json', data) 
             .then((response) => {
-                
+                console.log("response", response);
+            })
+            .catch((error) => {
+                console.log('error', error);
             });
     }
 
-    return { initializeFirebase };
+    return { initializeFirebase, pushTextToFirebase };
 
 };
 

@@ -8,6 +8,8 @@ let CameraController = function ($scope, $window, $timeout, $cordovaBarcodeScann
 
     console.log("barCode", $cordovaBarcodeScanner);
 
+    console.log("firebaseservice", FirebaseService.pushTextToFirebase);
+
     $scope.beerSearch = function() {
         BeerService.beerDBTest()
         .then((data) => {
@@ -114,10 +116,7 @@ let CameraController = function ($scope, $window, $timeout, $cordovaBarcodeScann
         .then((data) => {
             console.log("data", data);
 
-            FirebaseService.pushTextToFirebase(data)
-            .then((response) => {
-
-            });
+            FirebaseService.pushTextToFirebase(data);
 
             // $('#displayText').text(data.text);
         })
@@ -126,6 +125,11 @@ let CameraController = function ($scope, $window, $timeout, $cordovaBarcodeScann
         });
     };
 
+    $scope.testPush = function() {
+        let data = {data: 'hello'}
+        console.log('controller', data);
+        FirebaseService.pushTextToFirebase(data);
+    }
     
 
 };
