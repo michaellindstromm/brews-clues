@@ -119,5 +119,5 @@ let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/login');
+  $urlRouterProvider.otherwise('/app/camera');
 });

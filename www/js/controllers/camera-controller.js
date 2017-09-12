@@ -1,4 +1,4 @@
-let CameraController = function ($scope, $timeout, $cordovaFile, $cordovaFileTransfer, $cordovaCamera, BeerService) {
+let CameraController = function ($scope, $window, $timeout, $cordovaCamera, BeerService) {
 
     $scope.beerSearch = function() {
         BeerService.beerDBTest()
@@ -72,7 +72,36 @@ let CameraController = function ($scope, $timeout, $cordovaFile, $cordovaFileTra
         
     };
 
+    const doSomething = function (error, text) {
+        if (error) {
+            $window.alert("error", error);
+        } else {
+            $window.alert(text);
+        }
+    }
+
     // $scope.beerSearch();
+    $scope.scan = function() {
+        var options = {
+            quality: 50,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.CAMERA,
+            allowEdit: true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 100,
+            targetHeight: 100,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false,
+            correctOrientation: true
+        };
+
+        $cordovaCamera.getPicture(options).then(function (imageData) {
+            var image = document.getElementById('myImage');
+            image.src = "data:image/jpeg;base64," + imageData;
+        }, function (err) {
+            // error
+        });
+    };
 
 };
 
