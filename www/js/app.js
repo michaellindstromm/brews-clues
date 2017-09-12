@@ -54,8 +54,13 @@ let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
 
   .state('login', {
     url: '/login',
-    templateUrl: '../templates/auth.html',
-    controller: 'AuthController'
+    templateUrl: '../templates/login.html',
+    controller: 'LoginController'
+  })
+  .state('register', {
+    url: '/register',
+    templateUrl: '../templates/registration.html',
+    controller: 'RegistrationController'
   })
   .state('app', {
     url: '/app',

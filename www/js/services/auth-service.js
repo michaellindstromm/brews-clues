@@ -1,10 +1,21 @@
-let AuthService = function($q, $http) {
+let AuthService = function($q, $http, $rootScope) {
+    $rootScope.isLoggedIn = function () {
+    
+        let currentUserEmail = $window.localStorage.getItem('email');
+        let currentUserPassword = $window.localStorage.getItem('password');
+    
+        if (currentUserEmail !== undefined && currentUserPassword !== undefined) {
+            
+            return true;
+    
+        } else {
+    
+            return false;
+        }
+    };
+    
+    let currentUser = {};
 
-    let currentUser = null;
-
-    let googleClientID = '24755791061-tn51l2juoa9hco7osf91ts3slatj29b4.apps.googleusercontent.com';
-
-    let googleClientSecret = 'z63-qYByG_yWhoziO4VO8Wq6';
 
     const getCurrentUser = function () {
         return currentUser;
@@ -24,17 +35,21 @@ let AuthService = function($q, $http) {
         });
     };
 
-    const loginWithGoogle = function() {
-        let google = new firebase.auth.GoogleAuthProvider();
-        return firebase.auth().signInWithPopup(google);
+    const setCurrentEmailAndPass = function(email, password) {
+        currentUser.email = email;
+        currentUser.password = password;
+        $window.localStorage.setItem("email", email);
+        $window.localStorage.setItem("password", password);
     };
 
-    const getClientID = function() {
-        return googleClientID;
-    }
+
+    const logout = function() {
+        $window.localStorage.removeItem("email");
+        $window.localStorage.removeItem("password");
+    };
 
 
-    return { getCurrentUser, isAuthenticated, loginWithGoogle, getClientID }
+    return { getCurrentUser, isAuthenticated, setCurrentEmailAndPass, logout }
 }
 
 angular.module('beer').factory('AuthService', AuthService);
