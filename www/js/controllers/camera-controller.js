@@ -4,6 +4,8 @@ let CameraController = function ($scope, $window, $timeout, $cordovaBarcodeScann
     
     // console.log("qr", QRScanner);
 
+    console.log("pTag", $('#displayText').text());
+
     console.log("barCode", $cordovaBarcodeScanner);
 
     $scope.beerSearch = function() {
@@ -111,6 +113,7 @@ let CameraController = function ($scope, $window, $timeout, $cordovaBarcodeScann
         $cordovaBarcodeScanner.scan()
         .then((data) => {
             console.log("data", data);
+            $('#displayText').text(data);
         })
         .catch((error) => {
             console.log("error", error);
