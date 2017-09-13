@@ -29,7 +29,7 @@ let LoginController = function(AuthService, FirebaseService, $timeout, $scope, $
                 let correctUser;
 
                 $(keys).each((index, item) => {
-                    let thisUser = user[item];
+                    let thisUser = users[item];
                     if (thisUser.email === response.email) {
                         correctUser = response.uglyID;
                     }
