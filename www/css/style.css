@@ -3,11 +3,20 @@
 .button-energized {
     display: block;
     margin: 4rem auto;
+    width: 90%;
 }
 
 input {
-    display: block;
+    /* display: block;
     margin: 2rem auto;
-    border-bottom: 1px solid #30CBBA !important;
+    border-bottom: 1px solid #30CBBA !important; */
     text-align: center;
+}
+
+.item-input {
+    border: none;
+    border-bottom: 1px solid #30CBBA;
+    margin: 0 auto;
+    margin-top: 2rem;
+    width: 90%;
 }

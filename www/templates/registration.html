@@ -4,11 +4,25 @@
         <h1 class="title">Register</h1>
     </ion-header-bar>
     <ion-content>
-        <input type="email" ng-model="userEmail" placeholder="Email">
 
-        <input type="password" ng-model="userPassword" id="firstPass" placeholder="Password">
-        <input type="password" id="repeatPass" placeholder="Confirm Password">
-      <!-- <ion-icon class="ion-social-googleplus"></ion-icon> -->
-        <button class="button button-energized" ng-click="register()">Register</button>
+        <div class="list">
+            <label class="item item-input item-floating-label">
+                <input type="text" ng-model="userFirstName" placeholder="First Name" id="registerFirst" required>
+            </label>
+            <label class="item item-input item-floating-label">
+                <input type="text" ng-model="userLastName" placeholder="Last Name" id="registerLast" required>
+            </label>
+            <label class="item item-input item-floating-label">
+                <input type="text" ng-model="userEmail" placeholder="Email" id="registerEmail" required>
+            </label>
+            <label class="item item-input item-floating-label" id="firstPassLabel">
+                <input type="password" ng-model="userPassword" id="firstPass" placeholder="Password" required>
+            </label>
+            <label class="item item-input item-floating-label" id="repeatPassLabel">
+                <input type="password" id="repeatPass" placeholder="Confirm Password" required>
+            </label>
+        </div>
+
+        <button class="button button-energized" ng-click="register(userEmail, repeatPassword)">Register</button>
     </ion-content>
 </ion-view>

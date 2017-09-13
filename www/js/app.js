@@ -27,10 +27,26 @@ let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
 
   });
   
-  angular.module('beer').run(function($ionicPlatform, $rootScope, $state, AuthService, FirebaseService) {
+  angular.module('beer').run(function($ionicPlatform, $rootScope, $state, $window, AuthService, FirebaseService) {
     $ionicPlatform.ready(function() {
 
-      // console.log("qrscanner", QRScanner);
+      $rootScope.isLoggedIn = function () {
+
+        // let currentUserEmail = $window.localStorage.getItem('email');
+        // let currentUserPassword = $window.localStorage.getItem('password');
+
+        let currentUser = $window.localStorage.getItem('uglyID');
+
+        if (currentUser !== undefined && currentUser !== null) {
+          
+          return true;
+
+        } else {
+
+          return false;
+        }
+
+      };
 
       FirebaseService.initializeFirebase();
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -44,7 +60,6 @@ let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
       }
-
 
   });
 })
@@ -62,19 +77,17 @@ let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
     templateUrl: '../templates/registration.html',
     controller: 'RegistrationController'
   })
+  .state('registerCategories', {
+    url: 'categories',
+    templateUrl: '../templates/register-categories.html',
+    controller: 'RegisterCategoriesController'
+  })
   .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/side-menu.html',
     controller: 'SideMenuController'
   })
-  // .state('app.login', {
-  //   url: '/login',
-  //   views: {
-  //     templateUrl: 'templates/auth.html',
-  //     controller: 'AuthController'
-  //   }
-  // })
   .state('app.camera', {
     url: '/camera',
     views: {
