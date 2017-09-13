@@ -7,9 +7,7 @@ let LoginController = function(AuthService, FirebaseService, $timeout, $scope, $
 
     if ($rootScope.isLoggedIn()) {
 
-        $timeout(() => {
             $state.go('app.brews.suggestions')
-        }, 1500);
     }
 
 
