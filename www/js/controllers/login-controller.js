@@ -15,8 +15,6 @@ let LoginController = function(AuthService, FirebaseService, $timeout, $scope, $
 
     $scope.login = function (email, password) {
 
-        // FirebaseService.createNewFirebaseUser(email, password);
-
         AuthService.loginFirebaseUser(email, password)
         .then((response) => {
             console.log("controller response", response);
@@ -40,49 +38,13 @@ let LoginController = function(AuthService, FirebaseService, $timeout, $scope, $
                     $state.go('app.brews.suggestions');
                 }
             })
-            // FirebaseService.getUsers()
-            // .then((response) => {
-            //     let users = response.data;
-            //     let keys = Object.keys(users);
-    
-            //     let correctUser = {};
-            //     $(keys).each((index, item) => {
-            //         let thisUser = users[item];
-            //         console.log("thisUser", thisUser.email);
-            //         console.log("thisUser", thisUser.password);
-    
-            //         // Email Check
-            //         if (thisUser.email === email) {
-            //             correctUser.email = email;
-            //         } else{}
-    
-            //         // Password Check
-            //         if (thisUser.password === password) {
-            //             correctUser.password = password;
-            //         } else{}
-    
-            //         //UglyID set
-            //         if (thisUser.email === email && thisUser.password === password) {
-            //             correctUser.uglyID = keys[index];
-            //         } else{}
-            //     });
-    
-            //     let correctUserKeys = Object.keys(correctUser);
-    
-            //     if (correctUserKeys.length === 3) {
-            //         AuthService.setCurrentUser(correctUser);
-            //         $state.go('app.brews.suggestions');
-            //     }
-    
-                
-            // })
         })
         .catch((error) => {
             console.log("controller error", error);
         });
-
-
     };
+
+
 
     $scope.logout = function () {
         AuthService.logout();

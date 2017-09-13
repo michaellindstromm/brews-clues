@@ -27,27 +27,6 @@ let FirebaseService = function ($http, FireKey) {
         });
     };
 
-    let createNewFirebaseUser = function(email, password) {
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-            .then((response) => {
-                console.log("firebase login success response:", response);
-            })
-            .catch((error) => {
-                console.log("firebase login error: ", error);
-            }); 
-    };
-
-    let login = function(email, password) {
-        firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((response) => {
-            console.log("firebase service response: ", response);
-            return response;
-        })
-        .catch((error) => {
-            console.log("firebase login error: ", error);
-        });
-    };
-
     return { initializeFirebase, pushTextToFirebase, getUsers };
 
 };
