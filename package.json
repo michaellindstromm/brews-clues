@@ -14,6 +14,7 @@
         "cordova-plugin-file-transfer": "^1.6.3",
         "cordova-plugin-googleplus": "^5.1.1",
         "cordova-plugin-qrscanner": "^2.5.0",
+        "cordova-plugin-whitelist": "^1.3.1",
         "phonegap-plugin-barcodescanner": "git+https://github.com/phonegap/phonegap-plugin-barcodescanner.git"
     },
     "cordova": {
@@ -25,7 +26,8 @@
             "cordova-plugin-googleplus": {
                 "REVERSED_CLIENT_ID": "com.googleusercontent.apps.24755791061-n0nj1jtmjbmof33m146skqgjku3pcdbs"
             },
-            "phonegap-plugin-barcodescanner": {}
+            "phonegap-plugin-barcodescanner": {},
+            "cordova-plugin-whitelist": {}
         }
     }
 }
