@@ -1,14 +1,29 @@
-let LoginController = function(AuthService, FirebaseService, $timeout, $scope, $state, $rootScope ) {
+let LoginController = function(AuthService, FirebaseService, $ionicLoading, $timeout, $scope, $state, $rootScope ) {
     
-    // console.log("isloggedin", $rootScope.isLoggedIn())
+    console.log("isloggedin", $rootScope.isLoggedIn())
 
     // $('#loginEmail').val('');
     // $('#loginPass').val('');
 
+    $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        template: '<ion-spinner icon="ripple"></ion-spinner>',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+    });
+    
     if ($rootScope.isLoggedIn()) {
 
+        $timeout(() => {
+            $ionicLoading.hide();    
             $state.go('app.brews.suggestions')
+        }, 2000)
 
+    } else {
+
+        $ionicLoading.hide();
     }
 
 
