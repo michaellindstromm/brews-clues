@@ -27,7 +27,7 @@ angular.module('beer', ['ionic', 'ngCordova']);
 
 //   });
   
-  angular.module('beer').run(function($ionicPlatform, $rootScope, $state, $window, AuthService, FirebaseService) {
+  angular.module('beer').run(function($ionicPlatform, $rootScope, $state, AuthService, FirebaseService) {
     $ionicPlatform.ready(function() {
 
       $rootScope.isLoggedIn = function () {
@@ -35,7 +35,7 @@ angular.module('beer', ['ionic', 'ngCordova']);
         // let currentUserEmail = $window.localStorage.getItem('email');
         // let currentUserPassword = $window.localStorage.getItem('password');
 
-        let currentUser = $window.localStorage.getItem('uglyID');
+        let currentUser = window.localStorage.getItem('uglyID');
 
         if (currentUser !== undefined && currentUser !== null) {
           

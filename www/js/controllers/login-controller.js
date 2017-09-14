@@ -1,4 +1,4 @@
-let LoginController = function(AuthService, FirebaseService, $timeout, $scope, $window, $state, $rootScope ) {
+let LoginController = function(AuthService, FirebaseService, $timeout, $scope, $state, $rootScope ) {
     
     console.log("isloggedin", $rootScope.isLoggedIn())
 

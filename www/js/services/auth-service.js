@@ -1,4 +1,4 @@
-let AuthService = function($q, $http, $window) {
+let AuthService = function($q, $http) {
     
     let currentUser = {};
 
@@ -30,7 +30,7 @@ let AuthService = function($q, $http, $window) {
         // $window.localStorage.setItem("password",user.password);
         // $window.localStorage.setItem("uglyID", user.uglyID);
         currentUser.uglyID = user;
-        $window.localStorage.setItem('uglyID', user);
+        window.localStorage.setItem('uglyID', user);
 
     };
 
@@ -38,7 +38,7 @@ let AuthService = function($q, $http, $window) {
     const logout = function() {
         // $window.localStorage.removeItem("email");
         // $window.localStorage.removeItem("password");
-        $window.localStorage.removeItem('uglyID');
+        window.localStorage.removeItem('uglyID');
     };
 
     const createNewFirebaseUser = function (email, password) {
