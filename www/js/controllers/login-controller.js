@@ -49,6 +49,8 @@ let LoginController = function(AuthService, FirebaseService, $ionicLoading, $tim
 
                 if (correctUser !== null) {
                     AuthService.setCurrentUser(correctUser);
+                    $('#loginEmail').val('');
+                    $('#loginPass').val('');
                     $state.go('app.brews.suggestions');
                 }
             })

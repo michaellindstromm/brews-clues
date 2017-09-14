@@ -58,3 +58,17 @@ input {
     padding: 0 !important;
     width: 100px;
 }
+
+#addBeerSearch {
+    width: 80%;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #30CBBA;
+}
+
+.mr-auto {
+    margin: 0 auto;
+}
+
+.searchBeersBtn {
+    margin-top: 2rem;
+}
