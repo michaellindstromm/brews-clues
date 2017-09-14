@@ -1,6 +1,6 @@
 let LoginController = function(AuthService, FirebaseService, $timeout, $scope, $state, $rootScope ) {
     
-    console.log("isloggedin", $rootScope.isLoggedIn())
+    // console.log("isloggedin", $rootScope.isLoggedIn())
 
     // $('#loginEmail').val('');
     // $('#loginPass').val('');
