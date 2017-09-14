@@ -45,13 +45,13 @@ input {
 .neverHad {
     position: absolute;
     left: 5px;
-    bottom: -40px;
+    bottom: -25px;
 }
 
 .rateBeer {
     position: absolute;
     right: 5px;
-    bottom: -40px;
+    bottom: -25px;
 }
 
 .ratingBtns {
