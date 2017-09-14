@@ -16,6 +16,7 @@ let LoginController = function(AuthService, $scope, $window, $state ) {
         $state.go('app.camera');
     };
 
+    
 };
 
 angular.module('beer').controller('LoginController', LoginController);
