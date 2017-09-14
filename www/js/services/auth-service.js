@@ -1,3 +1,4 @@
+
 let AuthService = function ($q, $http) {
 
     let currentUser = {};
@@ -21,7 +22,9 @@ let AuthService = function ($q, $http) {
         });
     };
 
+
     const setCurrentUser = function (user) {
+
 
         // currentUser.email = user.email;
         // currentUser.password = user.password;
@@ -35,7 +38,7 @@ let AuthService = function ($q, $http) {
     };
 
 
-    const logout = function () {
+    const logout = function() {
         // $window.localStorage.removeItem("email");
         // $window.localStorage.removeItem("password");
         window.localStorage.removeItem('uglyID');
@@ -68,7 +71,8 @@ let AuthService = function ($q, $http) {
         })
     };
 
-    const addUsertoNode = function (user) {
+    const addUsertoNode = function(user) {
+
         let uglyIDKey = firebase.database().ref('/users').push({}).getKey();
         firebase.database().ref(`/users/${uglyIDKey}`).set({
             uglyID: uglyIDKey,
@@ -76,7 +80,7 @@ let AuthService = function ($q, $http) {
             email: user.email,
             uid: user.uid
         });
-    }
+    };
 
 
     return { getCurrentUser, isAuthenticated, setCurrentUser, logout, loginFirebaseUser, createNewFirebaseUser, addUsertoNode }

@@ -3,14 +3,21 @@
     <h1 class="title">Login</h1>
   </ion-header-bar>
   <ion-content>
-    <input type="email" ng-model="userEmail" placeholder="Email">
-    <input type="password" ng-model="userPassword" placeholder="Password">
+    <div class="list">
+      <label class="item item-input item-floating-label email-label">
+        <input type="email" ng-model="userEmail" placeholder="Email" id="loginEmail">
+      </label>
+      <label class="item item-input item-floating-label item-input-password">
+        <input type="password" ng-model="userPassword" placeholder="Password" id="loginPass">
+      </label>
+    </div>
+    
     <button class="button button-energized" ng-click="login(userEmail, userPassword)">
       <!-- <ion-icon class="ion-social-googleplus"></ion-icon> -->
       Login
     </button>
     <button class="button button-energized" ng-click="register()">Register</button>
     <button class="button button-energized" ng-click="logout()">Logout</button>
-    <button ng-click="goCameraTesting()">Go To Camera</button>
+    <!-- <button class="button button-energized" ng-click="goCameraTesting()">Go To Camera</button> -->
   </ion-content>
 </ion-view>

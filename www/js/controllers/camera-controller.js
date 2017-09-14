@@ -16,6 +16,41 @@ let CameraController = function ($scope, $window, $timeout, $cordovaBarcodeScann
             console.log("DID THIS RUN?????", data.data.data);
         });
     };
+    $scope.scan = function() {
+        // var options = {
+        //     quality: 50,
+        //     destinationType: Camera.DestinationType.DATA_URL,
+        //     sourceType: Camera.PictureSourceType.CAMERA,
+        //     allowEdit: true,
+        //     encodingType: Camera.EncodingType.JPEG,
+        //     targetWidth: 100,
+        //     targetHeight: 100,
+        //     popoverOptions: CameraPopoverOptions,
+        //     saveToPhotoAlbum: false,
+        //     correctOrientation: true
+        // };
+
+        // $cordovaCamera.getPicture(options).then(function (imageData) {
+        //     var image = document.getElementById('myImage');
+        //     image.src = "data:image/jpeg;base64," + imageData;
+        // }, function (err) {
+        //     // error
+        // });
+
+        $cordovaBarcodeScanner.scan()
+        .then((data) => {
+            console.log("data", data);
+            let beers = data.text.split('\n');
+            console.log("beers: ", beers);
+
+            $(beers).each((index, item) => {
+                $('#displayText').append(item + '<br>');
+            });
+        })
+        .catch((error) => {
+            console.log("error", error);
+        });
+    };
 
     // $scope.getImage = function() {
     //     var file = document.querySelector('#files').files[0];
@@ -63,84 +98,23 @@ let CameraController = function ($scope, $window, $timeout, $cordovaBarcodeScann
         
     // };
 
-    const findBeerNamesInText = function(text) {
-        // let onLettersAndCarriage = text.replace(/[\W]/g, '');
-
-        // console.log("onLetters", onLettersAndCarriage);
-        // let splitByCarriage = onLettersAndCarriage.split(/\n/g, '');
-        
-        // console.log('splitByCarriage', splitByCarriage);
-
-        // for (var index = 0; index < splitByCarriage.length; index++) {
-        //     var element = splitByCarriage[index];
-            
-        //     let onlyLetters = element.replace(//g)
-            
-        // }
-
-        // let noLetters = text.replace(/[^A-Za-z]/g, '');
-        
-    };
-
-    const doSomething = function (error, text) {
-        if (error) {
-            $window.alert("error", error);
-        } else {
-            $window.alert(text);
-        }
-    }
 
     // $scope.beerSearch();
-    $scope.scan = function() {
-        // var options = {
-        //     quality: 50,
-        //     destinationType: Camera.DestinationType.DATA_URL,
-        //     sourceType: Camera.PictureSourceType.CAMERA,
-        //     allowEdit: true,
-        //     encodingType: Camera.EncodingType.JPEG,
-        //     targetWidth: 100,
-        //     targetHeight: 100,
-        //     popoverOptions: CameraPopoverOptions,
-        //     saveToPhotoAlbum: false,
-        //     correctOrientation: true
-        // };
 
-        // $cordovaCamera.getPicture(options).then(function (imageData) {
-        //     var image = document.getElementById('myImage');
-        //     image.src = "data:image/jpeg;base64," + imageData;
-        // }, function (err) {
-        //     // error
-        // });
+    // $scope.testPush = function() {
+    //     let data = { text: "Sam Adams\nBudweiser\nDogfish Head IPA\nLagunitas IPA\nYazoo Dos Perros"};
+    //     console.log('controller', data);
+    //     FirebaseService.pushTextToFirebase(data);
+    // }
 
-        $cordovaBarcodeScanner.scan()
-        .then((data) => {
-            console.log("data", data);
-            let beers = data.text.split('\n');
-            console.log("beers: ", beers);
-
-            $(beers).each((index, item) => {
-                $('#displayText').append(item + '<br>');
-            });
-        })
-        .catch((error) => {
-            console.log("error", error);
-        });
-    };
-
-    $scope.testPush = function() {
-        let data = { text: "Sam Adams\nBudweiser\nDogfish Head IPA\nLagunitas IPA\nYazoo Dos Perros"};
-        console.log('controller', data);
-        FirebaseService.pushTextToFirebase(data);
-    }
-
-    $scope.testTextManipulation = function() {
-        let data = { text: "Sam Adams\nBudweiser\nDogfish Head IPA\nLagunitas IPA\nYazoo Dos Perros" };
-        let beers = data.text.split('\n');
-        console.log("beers: ", beers);
-        $(beers).each((index, item) => {
-            $('#displayText').append(item + '<br>');
-        });
-    }
+    // $scope.testTextManipulation = function() {
+    //     let data = { text: "Sam Adams\nBudweiser\nDogfish Head IPA\nLagunitas IPA\nYazoo Dos Perros" };
+    //     let beers = data.text.split('\n');
+    //     console.log("beers: ", beers);
+    //     $(beers).each((index, item) => {
+    //         $('#displayText').append(item + '<br>');
+    //     });
+    // }
     
 
 };

@@ -30,7 +30,8 @@ let RegistrationController = function ($scope, $state, AuthService, FirebaseServ
         let firstName = $('#registerFirst').val();
         let lastName = $('#registerLast').val();
 
-        let checkEmail = function () {
+
+        let checkEmail = function() {
             let matcher = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             if (registerEmail.match(matcher)) {
                 return true;
@@ -40,6 +41,7 @@ let RegistrationController = function ($scope, $state, AuthService, FirebaseServ
         }
 
         if (firstPass === repeatPass && repeatPass.length > 7 && firstName.length > 0 && lastName.length && checkEmail()) {
+
 
             AuthService.createNewFirebaseUser(registerEmail, repeatPass)
                 .then((response) => {
@@ -83,6 +85,7 @@ let RegistrationController = function ($scope, $state, AuthService, FirebaseServ
                             }
                         })
                 });
+
 
 
 

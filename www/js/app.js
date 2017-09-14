@@ -4,33 +4,49 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('beer', ['ionic', 'ngCordova', 'ngCordovaOauth']);
+angular.module('beer', ['ionic', 'ngCordova']);
 
-let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
+// let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
 
-  AuthService.isAuthenticated()
-    .then((userExists) => {
+//   AuthService.isAuthenticated()
+//     .then((userExists) => {
 
-      if (userExists) {
+//       if (userExists) {
 
-        console.log("true");
-        resolve();
+//         console.log("true");
+//         resolve();
 
-      } else {
+//       } else {
 
-        console.log("false");
-        reject();
+//         console.log("false");
+//         reject();
 
-      }
+//       }
 
-    });
+//     });
 
-  });
+//   });
   
   angular.module('beer').run(function($ionicPlatform, $rootScope, $state, AuthService, FirebaseService) {
     $ionicPlatform.ready(function() {
 
-      // console.log("qrscanner", QRScanner);
+      $rootScope.isLoggedIn = function () {
+
+        // let currentUserEmail = $window.localStorage.getItem('email');
+        // let currentUserPassword = $window.localStorage.getItem('password');
+
+        let currentUser = window.localStorage.getItem('uglyID');
+
+        if (currentUser !== undefined && currentUser !== null) {
+          
+          return true;
+
+        } else {
+
+          return false;
+        }
+
+      };
 
       FirebaseService.initializeFirebase();
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -44,7 +60,6 @@ let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
       }
-
 
   });
 })
@@ -62,19 +77,17 @@ let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
     templateUrl: '../templates/registration.html',
     controller: 'RegistrationController'
   })
+  .state('registerCategories', {
+    url: 'categories',
+    templateUrl: '../templates/register-categories.html',
+    controller: 'RegisterCategoriesController'
+  })
   .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/side-menu.html',
     controller: 'SideMenuController'
   })
-  // .state('app.login', {
-  //   url: '/login',
-  //   views: {
-  //     templateUrl: 'templates/auth.html',
-  //     controller: 'AuthController'
-  //   }
-  // })
   .state('app.camera', {
     url: '/camera',
     views: {
