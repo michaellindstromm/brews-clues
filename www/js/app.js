@@ -30,23 +30,23 @@ angular.module('beer', ['ionic', 'ngCordova']);
   angular.module('beer').run(function($ionicPlatform, $rootScope, $state, AuthService, FirebaseService) {
     $ionicPlatform.ready(function() {
 
-      $rootScope.isLoggedIn = function () {
+      // $rootScope.isLoggedIn = function () {
 
-        // let currentUserEmail = $window.localStorage.getItem('email');
-        // let currentUserPassword = $window.localStorage.getItem('password');
+      //   // let currentUserEmail = $window.localStorage.getItem('email');
+      //   // let currentUserPassword = $window.localStorage.getItem('password');
 
-        let currentUser = window.localStorage.getItem('uglyID');
+      //   let currentUser = window.localStorage.getItem('uglyID');
 
-        if (currentUser !== undefined && currentUser !== null) {
+      //   if (currentUser !== undefined && currentUser !== null) {
           
-          return true;
+      //     return true;
 
-        } else {
+      //   } else {
 
-          return false;
-        }
+      //     return false;
+      //   }
 
-      };
+      // };
 
       FirebaseService.initializeFirebase();
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
