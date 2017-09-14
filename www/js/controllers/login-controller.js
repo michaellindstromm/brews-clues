@@ -1,15 +1,15 @@
 let LoginController = function(AuthService, FirebaseService, $timeout, $scope, $state, $rootScope ) {
     
-    // console.log("isloggedin", $rootScope.isLoggedIn())
+    console.log("isloggedin", $rootScope.isLoggedIn())
 
     // $('#loginEmail').val('');
     // $('#loginPass').val('');
 
-    // if ($rootScope.isLoggedIn()) {
+    if ($rootScope.isLoggedIn()) {
 
-    //         $state.go('app.brews.suggestions')
+            $state.go('app.brews.suggestions')
 
-    // }
+    }
 
 
     $scope.login = function (email, password) {
