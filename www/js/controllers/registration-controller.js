@@ -104,8 +104,8 @@ let RegistrationController = function ($scope, $state, AuthService, FirebaseServ
         }
     };
 
-    $scope.goToCats = function() {
-        $state.go('categories');
+    $scope.goToRegisterBeers = function() {
+        $state.go('registerBeers');
     };
 
 };
