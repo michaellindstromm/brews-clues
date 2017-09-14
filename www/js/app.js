@@ -30,24 +30,6 @@ angular.module('beer', ['ionic', 'ngCordova']);
   angular.module('beer').run(function($ionicPlatform, $rootScope, $state, AuthService, FirebaseService) {
     $ionicPlatform.ready(function() {
 
-      // $rootScope.isLoggedIn = function () {
-
-      //   // let currentUserEmail = $window.localStorage.getItem('email');
-      //   // let currentUserPassword = $window.localStorage.getItem('password');
-
-      //   let currentUser = window.localStorage.getItem('uglyID');
-
-      //   if (currentUser !== undefined && currentUser !== null) {
-          
-      //     return true;
-
-      //   } else {
-
-      //     return false;
-      //   }
-
-      // };
-
       FirebaseService.initializeFirebase();
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -62,6 +44,25 @@ angular.module('beer', ['ionic', 'ngCordova']);
       }
 
   });
+
+  $rootScope.isLoggedIn = function () {
+
+        // let currentUserEmail = $window.localStorage.getItem('email');
+        // let currentUserPassword = $window.localStorage.getItem('password');
+
+        let currentUser = window.localStorage.getItem('uglyID');
+
+        if (currentUser !== undefined && currentUser !== null) {
+
+          return true;
+
+        } else {
+
+          return false;
+        }
+
+      };
+
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
