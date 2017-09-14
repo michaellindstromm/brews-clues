@@ -2,13 +2,13 @@ let LoginController = function(AuthService, FirebaseService, $timeout, $scope, $
     
     console.log("isloggedin", $rootScope.isLoggedIn())
 
-    $('#loginEmail').val('');
-    $('#loginPass').val('');
+    // $('#loginEmail').val('');
+    // $('#loginPass').val('');
 
     if ($rootScope.isLoggedIn()) {
 
             $state.go('app.brews.suggestions')
-            
+
     }
 
 

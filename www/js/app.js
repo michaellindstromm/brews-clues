@@ -6,26 +6,26 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('beer', ['ionic', 'ngCordova']);
 
-let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
+// let isAuth = ($location, AuthService) => new Promise((resolve, reject) => {
 
-  AuthService.isAuthenticated()
-    .then((userExists) => {
+//   AuthService.isAuthenticated()
+//     .then((userExists) => {
 
-      if (userExists) {
+//       if (userExists) {
 
-        console.log("true");
-        resolve();
+//         console.log("true");
+//         resolve();
 
-      } else {
+//       } else {
 
-        console.log("false");
-        reject();
+//         console.log("false");
+//         reject();
 
-      }
+//       }
 
-    });
+//     });
 
-  });
+//   });
   
   angular.module('beer').run(function($ionicPlatform, $rootScope, $state, $window, AuthService, FirebaseService) {
     $ionicPlatform.ready(function() {
