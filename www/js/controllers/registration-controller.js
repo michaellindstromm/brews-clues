@@ -1,4 +1,4 @@
-let RegistrationController = function($scope, $state, AuthService, FirebaseService) {
+let RegistrationController = function ($scope, $state, AuthService, FirebaseService) {
 
     $('#firstPass').on('keyup', (e) => {
 
@@ -23,12 +23,13 @@ let RegistrationController = function($scope, $state, AuthService, FirebaseServi
 
     });
 
-    $scope.register = function(email, password) {
+    $scope.register = function (email, password) {
         let firstPass = $('#firstPass').val();
         let repeatPass = $('#repeatPass').val();
         let registerEmail = $('#registerEmail').val();
         let firstName = $('#registerFirst').val();
         let lastName = $('#registerLast').val();
+
 
         let checkEmail = function() {
             let matcher = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -40,49 +41,51 @@ let RegistrationController = function($scope, $state, AuthService, FirebaseServi
         }
 
         if (firstPass === repeatPass && repeatPass.length > 7 && firstName.length > 0 && lastName.length && checkEmail()) {
-            
+
+
             AuthService.createNewFirebaseUser(registerEmail, repeatPass)
-            .then((response) => {
+                .then((response) => {
 
-                let fullName = firstName + " " + lastName;
-                let user = firebase.auth().currentUser;
-                user.updateProfile({
-                    displayName: fullName
+                    let fullName = firstName + " " + lastName;
+                    let user = firebase.auth().currentUser;
+                    user.updateProfile({
+                        displayName: fullName
+                    })
+
                 })
-                
-            })
-            .then(() => {
-                let fullName = firstName + " " + lastName;
-                let currentUser = firebase.auth().currentUser; 
-                console.log("current user", currentUser);
-                let newUser = {
-                    name: fullName,
-                    uid: currentUser.uid,
-                    email: currentUser.email
-                }
+                .then(() => {
+                    let fullName = firstName + " " + lastName;
+                    let currentUser = firebase.auth().currentUser;
+                    console.log("current user", currentUser);
+                    let newUser = {
+                        name: fullName,
+                        uid: currentUser.uid,
+                        email: currentUser.email
+                    }
 
-                AuthService.addUsertoNode(newUser);
-                console.log("new user", newUser);
-                FirebaseService.getUsers()
-                    .then((data) => {
-                        let users = data.data;
-                        let keys = Object.keys(users);
+                    AuthService.addUsertoNode(newUser);
+                    console.log("new user", newUser);
+                    FirebaseService.getUsers()
+                        .then((data) => {
+                            let users = data.data;
+                            let keys = Object.keys(users);
 
-                        let correctUser;
+                            let correctUser;
 
-                        $(keys).each((index, item) => {
-                            let thisUser = users[item];
-                            if (thisUser.email === currentUser.email) {
-                                correctUser = thisUser.uglyID;
+                            $(keys).each((index, item) => {
+                                let thisUser = users[item];
+                                if (thisUser.email === currentUser.email) {
+                                    correctUser = thisUser.uglyID;
+                                }
+                            })
+
+                            if (correctUser !== null) {
+                                AuthService.setCurrentUser(correctUser);
+                                $state.go('registerCategories');
                             }
                         })
+                });
 
-                        if (correctUser !== null) {
-                            AuthService.setCurrentUser(correctUser);
-                            $state.go('registerCategories');
-                        }
-                    })
-            });
 
 
 
