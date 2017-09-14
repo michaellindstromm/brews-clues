@@ -1,4 +1,4 @@
-let SideMenuController = function ($scope, $ionicModal, $timeout, $state, AuthService) {
+let SideMenuController = function ($scope, $timeout, $state, AuthService) {
 
   $scope.logout = function () {
     AuthService.logout();
