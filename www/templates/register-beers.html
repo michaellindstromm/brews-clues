@@ -1,0 +1,39 @@
+<ion-view view-title="Register Beers">
+
+    <ion-header-bar>
+        <h1 class="title">Rate Beers</h1>
+    </ion-header-bar>
+    <ion-content>
+
+        <div class="list card">
+        
+            <div class="item">
+                <!-- {{Name}} -->
+                <h1 class="center-text">Naughty 90</h1>
+            </div>
+        
+            <div class="item item-image">
+                <!-- {{medium image}} -->
+                <img src="https://s3.amazonaws.com/brewerydbapi/beer/oeGSxs/upload_FiPLQC-medium.png">
+            </div>
+            
+            <div class="list">
+                <div class="item range range-positive">
+                    <i class="icon ion-thumbsdown"></i>
+                    <input type="range" name="beerRating" min="0" max="100" value="50" id="beerRatingRange" ng-model="beerRating">
+                    <i class="icon ion-thumbsup"></i>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="ratingOutputDiv">
+            <p class="ratingOutput center-text">{{beerRating}}</p>
+        </div>
+
+        <button class="neverHad button button-assertive ratingBtns">Never Had</button>
+        <button class="rateBeer button button-balanced ratingBtns" ng-click="rate()">Rate!</button>
+
+    </ion-content>
+</ion-view>

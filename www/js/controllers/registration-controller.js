@@ -63,8 +63,8 @@ let RegistrationController = function ($scope, $state, AuthService, FirebaseServ
                         email: currentUser.email
                     }
 
-                    AuthService.addUsertoNode(newUser);
-                    console.log("new user", newUser);
+                    FirebaseService.addUsertoNode(newUser);
+
                     FirebaseService.getUsers()
                         .then((data) => {
                             let users = data.data;
@@ -81,7 +81,7 @@ let RegistrationController = function ($scope, $state, AuthService, FirebaseServ
 
                             if (correctUser !== null) {
                                 AuthService.setCurrentUser(correctUser);
-                                $state.go('registerCategories');
+                                $state.go('categories');
                             }
                         })
                 });
@@ -102,6 +102,10 @@ let RegistrationController = function ($scope, $state, AuthService, FirebaseServ
         } else if (lastName.length === 0) {
             console.log("Must input last name");
         }
+    };
+
+    $scope.goToCats = function() {
+        $state.go('categories');
     };
 
 };

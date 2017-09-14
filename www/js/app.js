@@ -30,7 +30,6 @@ angular.module('beer', ['ionic', 'ngCordova']);
   angular.module('beer').run(function($ionicPlatform, $rootScope, $state, AuthService, FirebaseService) {
     $ionicPlatform.ready(function() {
 
-      FirebaseService.initializeFirebase();
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -42,10 +41,11 @@ angular.module('beer', ['ionic', 'ngCordova']);
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault();
       }
-
-  });
-
-  $rootScope.isLoggedIn = function () {
+      
+    });
+    
+    FirebaseService.initializeFirebase();
+    $rootScope.isLoggedIn = function () {
 
         // let currentUserEmail = $window.localStorage.getItem('email');
         // let currentUserPassword = $window.localStorage.getItem('password');
@@ -78,10 +78,10 @@ angular.module('beer', ['ionic', 'ngCordova']);
     templateUrl: '../templates/registration.html',
     controller: 'RegistrationController'
   })
-  .state('registerCategories', {
-    url: 'categories',
-    templateUrl: '../templates/register-categories.html',
-    controller: 'RegisterCategoriesController'
+  .state('registerBeers', {
+    url: '/registerBeers',
+    templateUrl: '../templates/register-beers.html',
+    controller: 'RegisterBeersController'
   })
   .state('app', {
     url: '/app',

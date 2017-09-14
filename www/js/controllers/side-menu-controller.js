@@ -1,8 +1,12 @@
 let SideMenuController = function ($scope, $timeout, $state, AuthService) {
 
-  $scope.logout = function () {
+  $scope.logout = function() {
     AuthService.logout();
     $state.go('login');
+  };
+
+  $scope.goToSuggestions = function() {
+    $state.go('app.brews.suggestions');
   };
 };
 

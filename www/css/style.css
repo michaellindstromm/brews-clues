@@ -20,3 +20,41 @@ input {
     margin-top: 2rem;
     width: 90%;
 }
+
+.range-positive {
+    border: none;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.ratingOutputDiv {
+    width: 15%;
+    height: 30px;
+    border-bottom: 1px solid #30CBBA;
+    margin: 1rem auto;
+    margin-top: 2rem;
+}
+
+.ratingOutput {
+    padding-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.neverHad {
+    position: absolute;
+    left: 5px;
+    bottom: -40px;
+}
+
+.rateBeer {
+    position: absolute;
+    right: 5px;
+    bottom: -40px;
+}
+
+.ratingBtns {
+    padding: 0 !important;
+    width: 100px;
+}

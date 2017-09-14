@@ -15,7 +15,7 @@ let BeerService = function ($http, BeerKey) {
         });
     };
 
-    const getAllBeers = function(ids) {
+    const getBeersByID = function(ids) {
         return $http.get(`http://api.brewerydb.com/v2/beers/?ids=${ids}&key=${getBeerKey()}`)
             .then((response) => {
                 console.log("response", response);
@@ -24,9 +24,29 @@ let BeerService = function ($http, BeerKey) {
             .catch((error) => {
                 console.log("error", error);
             });
-    }
+    };
 
-    return { getBeersBySearch, getAllBeers };
+    const getAllCategories = function() {
+        return $http.get(`http://api.brewerydb.com/v2/categories/?key=${getBeerKey()}`)
+        .then((response) => {
+            return response;
+        })
+        .catch((error) => {
+            console.log('error', error);
+        });
+    };
+
+    const getAllStyles = function () {
+        return $http.get(`http://api.brewerydb.com/v2/styles/?key=${getBeerKey()}`)
+            .then((response) => {
+                return response;
+            })
+            .catch((error) => {
+                console.log('error', error);
+            });
+    };
+
+    return { getBeersBySearch, getBeersByID, getAllCategories, getAllStyles };
 
 };
 

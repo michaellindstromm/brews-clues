@@ -1,12 +1,12 @@
-let FirebaseService = function ($http, FireKey) {
+let FirebaseService = function ($http, $window, FireKey) {
 
-    let config = FireKey.getConfig();
+    const config = FireKey.getConfig();
 
-    let initializeFirebase = function () {
+    const initializeFirebase = function () {
         firebase.initializeApp(config);
     };
 
-    let pushTextToFirebase = function (data) {
+    const pushTextToFirebase = function (data) {
         console.log('service', data);
         $http.post('https://brews-clues-a07a1.firebaseio.com/.json', data)
             .then((response) => {
@@ -17,7 +17,7 @@ let FirebaseService = function ($http, FireKey) {
             });
     };
 
-    let getUsers = function () {
+    const getUsers = function () {
         return $http.get('https://brews-clues-a07a1.firebaseio.com/users.json')
             .then((data) => {
                 return data;
@@ -27,7 +27,20 @@ let FirebaseService = function ($http, FireKey) {
             });
     };
 
-    return { initializeFirebase, pushTextToFirebase, getUsers };
+    const addUsertoNode = function (user) {
+
+        let uglyIDKey = firebase.database().ref('/users').push({}).getKey();
+        $window.localStorage.setItem('uglyID', uglyIDKey);
+        console.log("localUgly", $window.localStorage.getItem('uglyID'));
+        firebase.database().ref(`/users/${uglyIDKey}/profile`).set({
+            uglyID: uglyIDKey,
+            name: user.name,
+            email: user.email,
+            uid: user.uid
+        });
+    };
+
+    return { initializeFirebase, pushTextToFirebase, getUsers, addUsertoNode };
 
 };
 

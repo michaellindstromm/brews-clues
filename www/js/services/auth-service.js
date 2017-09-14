@@ -71,19 +71,8 @@ let AuthService = function ($q, $http) {
         })
     };
 
-    const addUsertoNode = function(user) {
 
-        let uglyIDKey = firebase.database().ref('/users').push({}).getKey();
-        firebase.database().ref(`/users/${uglyIDKey}`).set({
-            uglyID: uglyIDKey,
-            name: user.name,
-            email: user.email,
-            uid: user.uid
-        });
-    };
-
-
-    return { getCurrentUser, isAuthenticated, setCurrentUser, logout, loginFirebaseUser, createNewFirebaseUser, addUsertoNode }
+    return { getCurrentUser, isAuthenticated, setCurrentUser, logout, loginFirebaseUser, createNewFirebaseUser }
 }
 
 angular.module('beer').factory('AuthService', AuthService);

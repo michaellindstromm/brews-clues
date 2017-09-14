@@ -1,4 +1,13 @@
-let RegisterBeersController = function ($scope) {
+let RegisterBeersController = function ($scope, NearestNeighborService, BeerService) {
+
+
+    
+
+    $scope.rate = function() {
+        console.log(NearestNeighborService.getRadomBeerFromFoundationList());
+    }
+
+    
 
 };
 
