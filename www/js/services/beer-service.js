@@ -11,8 +11,8 @@ let BeerService = function ($http, $window, BeerKey) {
             return response;
         })
         .catch((error) => {
-            $window.alert(error);
-            console.log("error", error);
+            console.log("error", error.status);
+            $window.alert(error.status);
         });
     };
 
