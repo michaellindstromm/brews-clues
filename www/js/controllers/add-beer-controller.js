@@ -5,7 +5,7 @@ let AddBeerController = function ($scope, BeerService) {
             .then((data) => {
                 // console.log("data", data.data.data[0].name);
                 // let name = data.data.data[0].name;
-                $('#searchOutput').text(data);
+                $('#searchOutput').text(data.data.data[0].name);
             });
     };
 

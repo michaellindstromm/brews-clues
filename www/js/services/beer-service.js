@@ -6,7 +6,7 @@ let BeerService = function ($http, $window, BeerKey) {
     }
 
     const getBeersBySearch = function(search) {
-        return $http.get(`http://api.brewerydb.com/v2/search?q=${search}&type=beer&key=${getBeerKey()}`)
+        return $http.get(`https://brewscluesd21.herokuapp.com/api/brewerydb/search?q=${search}&type=beer&key=${getBeerKey()}`)
         .then((response) => {
             return response;
         })
