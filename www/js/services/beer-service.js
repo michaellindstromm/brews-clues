@@ -1,4 +1,4 @@
-let BeerService = function ($http, BeerKey) {
+let BeerService = function ($http, $window, BeerKey) {
 
     const getBeerKey = function() {
         let apiKey = BeerKey.getBeerKey();
@@ -11,6 +11,7 @@ let BeerService = function ($http, BeerKey) {
             return response;
         })
         .catch((error) => {
+            $window.alert(error);
             console.log("error", error);
         });
     };
