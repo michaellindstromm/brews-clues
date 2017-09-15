@@ -1,5 +1,7 @@
-let RegisterBeersController = function ($scope, NearestNeighborService, BeerService, FirebaseService) {
+let RegisterBeersController = function ($scope, $window, NearestNeighborService, BeerService, FirebaseService) {
 
+
+    console.log('local', $window.localStorage.getItem('uglyID'));
 
     FirebaseService.getRegisterBeerList()
     .then((data) => {
@@ -12,8 +14,21 @@ let RegisterBeersController = function ($scope, NearestNeighborService, BeerServ
 
 
 
+
     $scope.rate = function() {
-        console.log(NearestNeighborService.getRadomBeerFromFoundationList());
+        // console.log(NearestNeighborService.getRadomBeerFromFoundationList());
+        let ratingOutput = $('.ratingOutput');
+
+        let beers = FirebaseService.getCurrentlyViewedBeers();
+
+        $(ratingOutput).each((index, item) => {
+            console.log('ratingOutput', item.innerText);
+            if (item.innerText !== "") {
+                beers[index].rating = Number(item.innerText);
+            }
+        });
+
+        FirebaseService.rateBeers();
     }
 
     

@@ -2,9 +2,16 @@
   <ion-content>
     <!-- <div ng-repeat=""> -->
 
-    <div class="card">
-      <div class="item item-text-wrap">
-        This is a basic Card which contains an item that has wrapping text.
+    <div class="list card eachBeerCard" ng-repeat="(key, beer) in myBeerList">
+
+      <div class="item item-avatar beerRatingCard p-0" id="{{beer.id}}">
+        <img src={{beer.labels.icon}}>
+        <div class="center-text beerName">{{beer.name}}</div>
+        <div class="center-text">{{beer.style.shortName}}</div>
+        <div class="ratingOutputDiv">
+          <div class="ratingOutput center-text">{{beer.rating}}</div>
+          <!-- <button class="button button-balanced" ng-click="rate()">Rate!</button> -->
+        </div>
       </div>
     </div>
 

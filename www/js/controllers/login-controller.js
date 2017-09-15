@@ -1,6 +1,7 @@
-let LoginController = function(AuthService, FirebaseService, $ionicLoading, $timeout, $scope, $state, $rootScope ) {
+let LoginController = function(AuthService, FirebaseService, $ionicLoading, $window, $timeout, $scope, $state, $rootScope ) {
     
     console.log("isloggedin", $rootScope.isLoggedIn())
+    console.log('local', $window.localStorage.getItem('uglyID'));
 
     // $('#loginEmail').val('');
     // $('#loginPass').val('');
@@ -31,7 +32,6 @@ let LoginController = function(AuthService, FirebaseService, $ionicLoading, $tim
 
         AuthService.loginFirebaseUser(email, password)
         .then((response) => {
-            console.log("controller response", response);
 
             FirebaseService.getUsers()
             .then((data) => {
@@ -42,12 +42,14 @@ let LoginController = function(AuthService, FirebaseService, $ionicLoading, $tim
 
                 $(keys).each((index, item) => {
                     let thisUser = users[item];
-                    if (thisUser.email === response.email) {
-                        correctUser = response.uglyID;
+
+                    if (thisUser.profile.email === response.email) {
+                        correctUser = keys[index];
                     }
                 })
 
-                if (correctUser !== null) {
+
+                if (correctUser !== null && correctUser !== undefined) {
                     AuthService.setCurrentUser(correctUser);
                     $('#loginEmail').val('');
                     $('#loginPass').val('');

@@ -1,5 +1,7 @@
 let FirebaseService = function ($http, $window, FireKey) {
 
+    let localUser = $window.localStorage.getItem('uglyID');
+    
     const config = FireKey.getConfig();
 
     const initializeFirebase = function () {
@@ -10,10 +12,13 @@ let FirebaseService = function ($http, $window, FireKey) {
     // Keep track of beers the viewer is currently viewing and rating to hold data
     // *****************************************************************************
 
-    let currentlyViewedBeers;
+    let currentlyViewedBeers = [];
 
     const setCurrentlyViewedBeers = function(beers) {
-        currentlyViewedBeers = beers;
+        let keys = Object.keys(beers);
+        $(keys).each((index, item) => {
+            currentlyViewedBeers.push(beers[item]);
+        });
     };
     
     const getCurrentlyViewedBeers = function() {
@@ -23,17 +28,18 @@ let FirebaseService = function ($http, $window, FireKey) {
     // *****************************************************************************
     // *****************************************************************************
 
-    const pushTextToFirebase = function (data) {
-        console.log('service', data);
-        $http.post('https://brews-clues-a07a1.firebaseio.com/.json', data)
-            .then((response) => {
-                console.log("response", response);
-            })
-            .catch((error) => {
-                console.log('error', error);
-            });
-    };
+    const rateBeers = function() {
+        let beers = currentlyViewedBeers;
+        let beerObj = {};
+        $(beers).each((index, item) => {
+            if (item.hasOwnProperty('rating')) {
+                beerObj[item.id] = item;
+            }
+        });
 
+        // firebase.database().ref(`/users/${localUser}/beers`).set(beerObj);
+    };
+ 
     const getUsers = function () {
         return $http.get('https://brews-clues-a07a1.firebaseio.com/users.json')
             .then((data) => {
@@ -55,6 +61,7 @@ let FirebaseService = function ($http, $window, FireKey) {
             email: user.email,
             uid: user.uid
         });
+
     };
 
     const pushInitialBeers = function(beerObj) {
@@ -77,7 +84,17 @@ let FirebaseService = function ($http, $window, FireKey) {
         });
     };
 
-    return { initializeFirebase, pushTextToFirebase, getUsers, addUsertoNode, pushInitialBeers, getRegisterBeerList, setCurrentlyViewedBeers, getCurrentlyViewedBeers };
+    const getUsersBeers = function() {
+        return $http.get(`https://brews-clues-a07a1.firebaseio.com/users/${localUser}/beers/.json`)
+        .then((data) => {
+            return data;
+        })
+        .catch((error) => {
+            console.log('error', error);
+        });
+    };
+
+    return { initializeFirebase, getUsers, addUsertoNode, pushInitialBeers, getRegisterBeerList, setCurrentlyViewedBeers, getCurrentlyViewedBeers, rateBeers, getUsersBeers };
 
 };
 

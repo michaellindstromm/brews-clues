@@ -17,7 +17,7 @@ let BeerService = function ($http, $window, BeerKey) {
     };
 
     const getBeersByID = function(ids) {
-        return $http.get(`http://api.brewerydb.com/v2/beers/?ids=${ids}&key=${getBeerKey()}`)
+        return $http.get(`https://brewscluesd21.herokuapp.com/api/brewerydb/beers/?ids=${ids}&key=${getBeerKey()}`)
             .then((response) => {
                 console.log("response", response);
                 return response;
@@ -28,7 +28,7 @@ let BeerService = function ($http, $window, BeerKey) {
     };
 
     const getAllCategories = function() {
-        return $http.get(`http://api.brewerydb.com/v2/categories/?key=${getBeerKey()}`)
+        return $http.get(`https://brewscluesd21.herokuapp.com/api/brewerydb/categories/?key=${getBeerKey()}`)
         .then((response) => {
             return response;
         })
@@ -38,7 +38,7 @@ let BeerService = function ($http, $window, BeerKey) {
     };
 
     const getAllStyles = function () {
-        return $http.get(`http://api.brewerydb.com/v2/styles/?key=${getBeerKey()}`)
+        return $http.get(`https://brewscluesd21.herokuapp.com/api/brewerydb/styles/?key=${getBeerKey()}`)
             .then((response) => {
                 return response;
             })

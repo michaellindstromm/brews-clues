@@ -5,7 +5,7 @@
     </ion-header-bar>
     <ion-content>
 
-        <div class="list card" ng-repeat="(key, beer) in registerBeerList">
+        <div class="list card eachBeerCard" ng-repeat="(key, beer) in registerBeerList">
         
             <div class="item item-avatar beerRatingCard p-0">
                 <img src={{beer.labels.icon}}>
@@ -17,14 +17,14 @@
                 </div>
             </div>
         
-            <div class="item item-image">
+            <!-- <div class="item item-image"> -->
                 <!-- {{icon image}} -->
-            </div>
+            <!-- </div> -->
             
-            <div class="list">
+            <div class="list rangeRater">
                 <div class="item range range-positive">
                     <i class="icon ion-thumbsdown"></i>
-                    <input type="range" name="beerRating" step="5" min="0" max="100" value="50" id="beerRatingRange" ng-model="beerRating">
+                    <input type="range" name="beerRating" step="5" min="0" max="100" value="0" id="beerRatingRange" ng-model="beerRating">
                     <i class="icon ion-thumbsup"></i>
                 </div>
             </div>

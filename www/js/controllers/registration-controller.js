@@ -74,7 +74,7 @@ let RegistrationController = function ($scope, $state, AuthService, FirebaseServ
 
                             $(keys).each((index, item) => {
                                 let thisUser = users[item];
-                                if (thisUser.email === currentUser.email) {
+                                if (thisUser.profile.email === currentUser.email) {
                                     correctUser = thisUser.uglyID;
                                 }
                             })

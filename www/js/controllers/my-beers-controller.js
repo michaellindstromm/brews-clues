@@ -1,5 +1,10 @@
-let MyBeersController = function ($scope, BeerService) {
+let MyBeersController = function ($scope, BeerService, FirebaseService) {
 
+
+    FirebaseService.getUsersBeers()
+    .then((data) => {
+        $scope.myBeerList = data.data;
+    });
 
 };
 
