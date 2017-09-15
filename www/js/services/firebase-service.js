@@ -6,6 +6,23 @@ let FirebaseService = function ($http, $window, FireKey) {
         firebase.initializeApp(config);
     };
 
+    // *****************************************************************************
+    // Keep track of beers the viewer is currently viewing and rating to hold data
+    // *****************************************************************************
+
+    let currentlyViewedBeers;
+
+    const setCurrentlyViewedBeers = function(beers) {
+        currentlyViewedBeers = beers;
+    };
+    
+    const getCurrentlyViewedBeers = function() {
+        return currentlyViewedBeers;
+    };
+
+    // *****************************************************************************
+    // *****************************************************************************
+
     const pushTextToFirebase = function (data) {
         console.log('service', data);
         $http.post('https://brews-clues-a07a1.firebaseio.com/.json', data)
@@ -40,7 +57,27 @@ let FirebaseService = function ($http, $window, FireKey) {
         });
     };
 
-    return { initializeFirebase, pushTextToFirebase, getUsers, addUsertoNode };
+    const pushInitialBeers = function(beerObj) {
+        $http.post('https://brews-clues-a07a1.firebaseio.com/registerBeerList.json', beerObj)
+        .then((response) => {
+            console.log("response", response);
+        })
+        .catch((error) => {
+            console.log("error", error);
+        });
+    };
+
+    const getRegisterBeerList = function() {
+        return $http.get('https://brews-clues-a07a1.firebaseio.com/registerBeerList.json')
+        .then((data) => {
+            return data;
+        })
+        .catch((error) => {
+            console.log("error", error);
+        });
+    };
+
+    return { initializeFirebase, pushTextToFirebase, getUsers, addUsertoNode, pushInitialBeers, getRegisterBeerList, setCurrentlyViewedBeers, getCurrentlyViewedBeers };
 
 };
 

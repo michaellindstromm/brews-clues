@@ -30,33 +30,20 @@ input {
 }
 
 .ratingOutputDiv {
+    position: absolute;
+    right: 2px;
+    top: 2px;
     width: 15%;
-    height: 30px;
-    border-bottom: 1px solid #30CBBA;
-    margin: 1rem auto;
-    margin-top: 2rem;
+    height: 100%;
+    border-left: 1px solid #ddd;
+    margin-left: auto;
+    /* margin: 1rem auto;
+    margin-top: 2rem; */
 }
 
 .ratingOutput {
-    padding-bottom: 1rem;
+    margin-top: 1.5rem;
     font-size: 2rem;
-}
-
-.neverHad {
-    position: absolute;
-    left: 5px;
-    bottom: -25px;
-}
-
-.rateBeer {
-    position: absolute;
-    right: 5px;
-    bottom: -25px;
-}
-
-.ratingBtns {
-    padding: 0 !important;
-    width: 100px;
 }
 
 #addBeerSearch {
@@ -71,4 +58,20 @@ input {
 
 .searchBeersBtn {
     margin-top: 2rem;
+}
+
+.beerRatingCard {
+    padding: 0;
+}
+
+.p-0 {
+    padding: 0;
+}
+
+.beerName {
+    max-width: 250px;
+    margin: 0 auto;
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    padding-bottom: 10px;
 }

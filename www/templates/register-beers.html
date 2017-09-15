@@ -5,35 +5,33 @@
     </ion-header-bar>
     <ion-content>
 
-        <div class="list card">
+        <div class="list card" ng-repeat="(key, beer) in registerBeerList">
         
-            <div class="item">
-                <!-- {{Name}} -->
-                <h1 class="center-text">Naughty 90</h1>
+            <div class="item item-avatar beerRatingCard p-0">
+                <img src={{beer.labels.icon}}>
+                <div class="center-text beerName">{{beer.name}}</div>
+                <div class="center-text">{{beer.style.shortName}}</div>
+                <div class="ratingOutputDiv">
+                    <div class="ratingOutput center-text">{{beerRating}}</div>
+                    <!-- <button class="button button-balanced" ng-click="rate()">Rate!</button> -->
+                </div>
             </div>
         
             <div class="item item-image">
-                <!-- {{medium image}} -->
-                <img src="https://s3.amazonaws.com/brewerydbapi/beer/oeGSxs/upload_FiPLQC-medium.png">
+                <!-- {{icon image}} -->
             </div>
             
             <div class="list">
                 <div class="item range range-positive">
                     <i class="icon ion-thumbsdown"></i>
-                    <input type="range" name="beerRating" min="0" max="100" value="50" id="beerRatingRange" ng-model="beerRating">
+                    <input type="range" name="beerRating" step="5" min="0" max="100" value="50" id="beerRatingRange" ng-model="beerRating">
                     <i class="icon ion-thumbsup"></i>
                 </div>
             </div>
         </div>
 
 
-
-        <div class="ratingOutputDiv">
-            <p class="ratingOutput center-text">{{beerRating}}</p>
-        </div>
-
-        <button class="neverHad button button-assertive ratingBtns">Never Had</button>
-        <button class="rateBeer button button-balanced ratingBtns" ng-click="rate()">Rate!</button>
+        <button class="button button-energized" ng-click="rate()">Done!</button>
 
     </ion-content>
 </ion-view>

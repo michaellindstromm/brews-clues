@@ -1,7 +1,9 @@
 <ion-view view-title="Add Beer">
   <ion-content>
-    <input type="text" id="addBeerSearch" class="center-text mr-auto">
+    <input type="text" id="addBeerSearch" class="center-text mr-auto" ng-model="beerSearchInput">
     <!-- <a class="button button-energized" href="#/app/singleBrew">Single Brew</a> -->
-    <button class="button button-energized searchBeersBtn" ng-click="searchBeersFromUserInput()">Search Beers</button>
+    <button class="button button-energized searchBeersBtn" ng-click="search(beerSearchInput)">Search Beers</button>
+
+    <div id="searchOutput"></div>
   </ion-content>
 </ion-view>

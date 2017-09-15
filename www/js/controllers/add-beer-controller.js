@@ -1,10 +1,11 @@
 let AddBeerController = function ($scope, BeerService) {
 
-    $scope.searchBeersFromUserInput = function () {
-        let search = document.querySelector('#beerListGenTest').value;
+    $scope.search = function (search) {
         BeerService.getBeersBySearch(search)
             .then((data) => {
-                console.log("data", data);
+                console.log("data", data.data.data[0].name);
+                let name = data.data.data[0].name;
+                $('#searchOutput').text(name);
             });
     };
 
