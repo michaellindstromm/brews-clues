@@ -12,7 +12,7 @@ let BeerService = function ($http, $window, BeerKey) {
         })
         .catch((error) => {
             console.log("error", error.status);
-            $window.alert(error.status);
+            return error.status;
         });
     };
 
