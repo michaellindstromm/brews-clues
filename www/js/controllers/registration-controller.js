@@ -45,7 +45,7 @@ let RegistrationController = function ($scope, $state, AuthService, FirebaseServ
 
             AuthService.createNewFirebaseUser(registerEmail, repeatPass)
                 .then((response) => {
-
+                    console.log('response', response);
                     let fullName = firstName + " " + lastName;
                     let user = firebase.auth().currentUser;
                     user.updateProfile({
@@ -64,26 +64,8 @@ let RegistrationController = function ($scope, $state, AuthService, FirebaseServ
                     }
 
                     FirebaseService.addUsertoNode(newUser);
-
-                    FirebaseService.getUsers()
-                        .then((data) => {
-                            let users = data.data;
-                            let keys = Object.keys(users);
-
-                            let correctUser;
-
-                            $(keys).each((index, item) => {
-                                let thisUser = users[item];
-                                if (thisUser.profile.email === currentUser.email) {
-                                    correctUser = thisUser.uglyID;
-                                }
-                            })
-
-                            if (correctUser !== null) {
-                                AuthService.setCurrentUser(correctUser);
-                                $state.go('categories');
-                            }
-                        })
+                    $state.go('registerBeers');
+                    
                 });
 
 

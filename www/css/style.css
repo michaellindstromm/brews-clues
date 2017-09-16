@@ -48,7 +48,7 @@ input {
 
 #addBeerSearch {
     width: 80%;
-    padding-bottom: 1rem;
+    /* padding-bottom: 1rem; */
     border-bottom: 1px solid #30CBBA;
 }
 
@@ -78,4 +78,8 @@ input {
 
 .rangeRater {
     border-top: 1px solid #ddd;
+}
+
+.ion-chevron-left {
+    color: #646464 !important;
 }

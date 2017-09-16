@@ -1,6 +1,6 @@
 let FirebaseService = function ($http, $window, FireKey) {
 
-    let localUser = $window.localStorage.getItem('uglyID');
+   
     
     const config = FireKey.getConfig();
 
@@ -37,7 +37,9 @@ let FirebaseService = function ($http, $window, FireKey) {
             }
         });
 
-        // firebase.database().ref(`/users/${localUser}/beers`).set(beerObj);
+        let localUser = $window.localStorage.getItem('uglyID');
+
+        firebase.database().ref(`/users/${localUser}/beers`).set(beerObj);
     };
  
     const getUsers = function () {
@@ -53,6 +55,7 @@ let FirebaseService = function ($http, $window, FireKey) {
     const addUsertoNode = function (user) {
 
         let uglyIDKey = firebase.database().ref('/users').push({}).getKey();
+        console.log('uglyIDKey', uglyIDKey);
         $window.localStorage.setItem('uglyID', uglyIDKey);
         console.log("localUgly", $window.localStorage.getItem('uglyID'));
         firebase.database().ref(`/users/${uglyIDKey}/profile`).set({
@@ -85,6 +88,8 @@ let FirebaseService = function ($http, $window, FireKey) {
     };
 
     const getUsersBeers = function() {
+        let localUser = $window.localStorage.getItem('uglyID');
+        console.log('localUser', localUser);
         return $http.get(`https://brews-clues-a07a1.firebaseio.com/users/${localUser}/beers/.json`)
         .then((data) => {
             return data;

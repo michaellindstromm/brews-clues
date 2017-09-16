@@ -53,6 +53,7 @@ let LoginController = function(AuthService, FirebaseService, $ionicLoading, $win
                     AuthService.setCurrentUser(correctUser);
                     $('#loginEmail').val('');
                     $('#loginPass').val('');
+                    // location.reload();
                     $state.go('app.brews.suggestions');
                 }
             })

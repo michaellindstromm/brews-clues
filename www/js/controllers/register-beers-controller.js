@@ -1,14 +1,26 @@
-let RegisterBeersController = function ($scope, $window, NearestNeighborService, BeerService, FirebaseService) {
+let RegisterBeersController = function ($scope, $window, $state, $timeout, $ionicLoading, NearestNeighborService, BeerService, FirebaseService) {
 
+    $scope.beersLoaded = false;
+
+    $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        template: '<ion-spinner icon="ripple"></ion-spinner>',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+    });
 
     console.log('local', $window.localStorage.getItem('uglyID'));
 
     FirebaseService.getRegisterBeerList()
     .then((data) => {
          $scope.registerBeerList = data.data;
+         $ionicLoading.hide();
+         $scope.beersLoaded = true;
+         console.log('data.data', data.data);
          FirebaseService.setCurrentlyViewedBeers(data.data);
          let beer = FirebaseService.getCurrentlyViewedBeers();
-         console.log("beer", beer);
     });
     
 
@@ -29,6 +41,18 @@ let RegisterBeersController = function ($scope, $window, NearestNeighborService,
         });
 
         FirebaseService.rateBeers();
+        $ionicLoading.show({
+            content: 'Loading',
+            animation: 'fade-in',
+            template: '<ion-spinner icon="ripple"></ion-spinner>',
+            showBackdrop: true,
+            maxWidth: 200,
+            showDelay: 0
+        });
+        $timeout(() => {
+            $ionicLoading.hide();
+            $state.go('app.brews.myBeers')
+        }, 3000);
     }
 
     

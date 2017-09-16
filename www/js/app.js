@@ -102,7 +102,8 @@ angular.module('beer', ['ionic', 'ngCordova']);
     url: '/brews',
     views: {
       'menuContent': { 
-        templateUrl: 'templates/tabs-menu.html'
+        templateUrl: 'templates/tabs-menu.html',
+        controller: 'TabsController'
       }
     }
   })

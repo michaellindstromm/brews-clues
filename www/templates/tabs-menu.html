@@ -1,12 +1,12 @@
 <ion-tabs class="tabs-positive tabs-icon-top">
 
-    <ion-tab title="Suggestion" icon-on="ion-chatboxes" icon-off="ion-chatboxes" href="#/app/brews/suggestions">
+    <ion-tab title="Suggestion" icon-on="ion-chatboxes" icon-off="ion-chatboxes" ng-click="goSuggestions()">
         <ion-nav-view name="tab-suggestions"></ion-nav-view>
     </ion-tab>
-    <ion-tab title="My Beers" icon-on="ion-beer" icon-off="ion-beer" href="#/app/brews/myBeers">
+    <ion-tab title="My Beers" icon-on="ion-beer" icon-off="ion-beer" ng-click="goBeers()">
         <ion-nav-view name="tab-myBeers"></ion-nav-view>
     </ion-tab>
-    <ion-tab title="Add Beer" icon-on="ion-plus" icon-off="ion-plus" href="#/app/brews/addBeer">
+    <ion-tab title="Add Beer" icon-on="ion-plus" icon-off="ion-plus" ng-click="goAddBeer()">
         <ion-nav-view name="tab-addBeer"></ion-nav-view>
     </ion-tab>
 

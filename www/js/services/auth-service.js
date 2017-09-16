@@ -42,6 +42,10 @@ let AuthService = function ($q, $http) {
         // $window.localStorage.removeItem("email");
         // $window.localStorage.removeItem("password");
         window.localStorage.removeItem('uglyID');
+        firebase.auth().signOut()
+        .catch((error) => {
+            console.log('error', error);
+        });
     };
 
     const createNewFirebaseUser = function (email, password) {

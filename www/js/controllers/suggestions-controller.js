@@ -1,14 +1,16 @@
 let SuggestionsController = function ($scope, BeerService) {
+    $scope.$on('$ionicView.beforeEnter', function () {
+
+        $scope.beerSuggestions = '';
     
-    $scope.beerSuggestions = '';
-
-    // testID for ---- Lagunitas IPA
-    let testID = 'iLlMCb';
-
-    // BeerService.getBeersByID( testID )
-    // .then((data) => {
-    //     console.log("data", data.data.data[0]);
-    // });
+        // testID for ---- Lagunitas IPA
+        let testID = 'iLlMCb';
+    
+        // BeerService.getBeersByID( testID )
+        // .then((data) => {
+        //     console.log("data", data.data.data[0]);
+        // });
+    });
 
 };
 
