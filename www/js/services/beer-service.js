@@ -1,4 +1,4 @@
-let BeerService = function ($http, $window, BeerKey) {
+let BeerService = function ($http, $window, BeerKey, FirebaseService) {
 
     const getBeerKey = function() {
         let apiKey = BeerKey.getBeerKey();
@@ -46,6 +46,15 @@ let BeerService = function ($http, $window, BeerKey) {
                 console.log('error', error);
             });
     };
+
+    // getBeersBySearch('Redds Apple Ale')
+    // .then((response) => {
+
+    //     console.log('response', response.data.data[2]);
+    //     let correctBeer = response.data.data[2];
+    //     // FirebaseService.pushInitialBeers(correctBeer);
+    // });
+
 
     return { getBeersBySearch, getBeersByID, getAllCategories, getAllStyles };
 

@@ -1,4 +1,4 @@
-let LoginController = function(AuthService, FirebaseService, $ionicLoading, $window, $timeout, $scope, $state, $rootScope ) {
+let LoginController = function (AuthService, FirebaseService, NearestNeighborService, $ionicLoading, $window, $timeout, $scope, $state, $rootScope ) {
     
     console.log("isloggedin", $rootScope.isLoggedIn())
     console.log('local', $window.localStorage.getItem('uglyID'));
