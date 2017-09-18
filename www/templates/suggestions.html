@@ -2,12 +2,24 @@
   <ion-content>
     <!-- <div ng-repeat=""> -->
 
-      <div class="card" ng-repeat="(key, beer) in someBrews">
+      <!-- <div class="card" ng-repeat="(key, beer) in someBrews">
         <div class="item item-text-wrap">
           {{beer.name}}
         </div>
-      </div>
+      </div> -->
 
+      <div class="list card eachBeerCard" ng-repeat="(key, beer) in someBrews">
+
+        <div class="item item-avatar beerRatingCard p-0" id="{{beer.id}}">
+          <img src={{beer.labels.icon}}>
+          <div class="center-text beerName">{{beer.name}}</div>
+          <div class="center-text">{{beer.style.shortName}}</div>
+          <!-- <div class="ratingOutputDiv">
+            <div class="ratingOutput center-text">{{beer.rating}}</div>
+            <button class="button button-balanced" ng-click="rate()">Rate!</button>
+          </div> -->
+        </div>
+      </div>
     <!-- </div> -->
   
   </ion-content>

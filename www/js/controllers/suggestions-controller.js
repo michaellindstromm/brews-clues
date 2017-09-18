@@ -9,27 +9,43 @@ let SuggestionsController = function ($scope, $window, BeerService, FirebaseServ
         $scope.beerSuggestions = '';
         
         FirebaseService.getUsersBeers()
-            .then((response) => {
-                console.log('response', response);
+        .then((response) => {
 
-                // Used for comparison of unrated
-                let myBeers = response;
+            // All my beers
+            let allMyBeers = response.data;
 
-                // Split b/w unrated and already rated beers
-                let split = NearestNeighborService.splitUnratedAndRated(response.data);
+            // Split b/w unrated and already rated beers
+            let split = NearestNeighborService.splitUnratedAndRated(allMyBeers);
 
-                // IDs = all of the unrated beers
-                let IDs = split[0];
+            // IDs = all of the unrated beers
+            let IDs = split[0];
 
-                // ratedBeers = rated beers on list sorted in ascending order by rating
-                let ratedBeers = split[1];
+            // ratedBeers = rated beers on list sorted in ascending order by rating
+            // USE THIS TO SHOW HIGHEST RATED ON CURRENT BEER MENU
+            let ratedBeersUntouched = split[1];
 
-                NearestNeighborService.getUnratedInfo(IDs)
-                .then((unrated) => {
-                    console.log('turdBucket', unrated);
-                    $scope.someBrews = unrated;
-                });
+            console.log('ratedBeersUntouched', ratedBeersUntouched);
+
+            // Get correct Test Params for comparison
+            let ratedBeers = NearestNeighborService.onlyTestParamsFunction(allMyBeers, true);
+
+            // Get unrated beers correct test params info
+            NearestNeighborService.getUnratedInfo(IDs)
+            .then((unratedBeers) => {
+                let normalizedUnrated = NearestNeighborService.normalizeUnratedBeers(ratedBeers, unratedBeers);
+
+                let normalizedRated = NearestNeighborService.normalizeRatedBeers(ratedBeers);
+
+                let eucVals = NearestNeighborService.compareNormalizedData(normalizedRated, normalizedUnrated, ratedBeersUntouched);
+
+                let suggestions = NearestNeighborService.getSuggestions(eucVals);
+
+                let unratedBeersToShow = NearestNeighborService.createSuggestedBeersObject(suggestions, unratedBeers);
+
+
+                $scope.someBrews = unratedBeersToShow;
             });
+        });
 
     // });
 
