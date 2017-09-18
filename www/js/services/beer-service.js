@@ -19,7 +19,6 @@ let BeerService = function ($http, $window, BeerKey, FirebaseService) {
     const getBeersByID = function(ids) {
         return $http.get(`https://brewscluesd21.herokuapp.com/api/brewerydb/beers/?ids=${ids}&key=${getBeerKey()}`)
             .then((response) => {
-                console.log("response", response);
                 return response;
             })
             .catch((error) => {
