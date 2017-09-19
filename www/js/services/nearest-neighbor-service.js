@@ -18,6 +18,7 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
 
     const splitUnratedAndRated = function(obj) {
 
+
         // This first part is just setup for testing. Will get a string from QR Code that will look like setupAllBeers.
         // let setupAlreadyRatedBeers = 'fu2qgB\nZoBIHx\naMyzLn\ns5lxSd\nsCgeAO\nuzOl1k\nd9iNtl\nIH5ajM\n1RvWY5\ncdkpyx';
         // let setupUnratedBeers = 'KhYQ9T\nL3Juq0\n5WWDVq\nksF9st\nsiPwY9\nOwh80E\niwiRoK\ncG6leo\nChfN0e\neke8de\nfdaHy4\nH61Gte\nBon4k4';

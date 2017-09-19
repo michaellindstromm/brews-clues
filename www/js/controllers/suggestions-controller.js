@@ -1,5 +1,20 @@
 let SuggestionsController = function ($scope, $window, $ionicLoading, BeerService, FirebaseService, NearestNeighborService) {
-    // $scope.$on('$ionicView.beforeEnter', function () {
+    $scope.$on('$ionicView.beforeEnter', function () {
+
+        $scope.toggleBigCard = function($event) {
+  
+            let cT = $event.currentTarget;
+
+            if ($(cT).next().hasClass('showCard')) {
+                $(cT).next().addClass('hideCard');
+                $(cT).next().removeClass('showCard');
+            } else if ($(cT).next().hasClass('hideCard')) {
+                $(cT).next().addClass('showCard');
+                $(cT).next().removeClass('hideCard');
+            } else {
+                $(cT).next().addClass('showCard');
+            }
+        };
 
         $ionicLoading.show({
             content: 'Loading',
@@ -63,7 +78,8 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
             });
         });
 
-    // });
+    })
+   
 
 };
 

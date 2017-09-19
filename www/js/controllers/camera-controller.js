@@ -31,17 +31,9 @@ let CameraController = function ($scope, $state, $window, $timeout, $cordovaBarc
 
         $cordovaBarcodeScanner.scan()
         .then((data) => {
-            console.log("data", data);
             let beers = data.text;
-            console.log("beers: ", beers);
-
 
             $window.localStorage.setItem('listIDs', beers);
-
-            let newBeers = beers.split('\n');
-            $(newBeers).each((index, item) => {
-                $('#displayText').append(item + '<br>');
-            });
 
             $state.go('app.brews.suggestions');
         })
