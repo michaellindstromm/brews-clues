@@ -4,13 +4,18 @@
 
     <div class="list card eachBeerCard" ng-repeat="(key, beer) in myBeerList">
 
-      <div class="item item-avatar beerRatingCard p-0" id="{{beer.id}}">
+      <div class="item item-avatar beerRatingCard p-0" id="{{beer.id}}" ng-click="toggleBigCard($event)">
         <img src={{beer.labels.icon}}>
         <div class="center-text beerName">{{beer.name}}</div>
         <div class="center-text">{{beer.style.shortName}}</div>
         <div class="ratingOutputDiv">
           <div class="ratingOutput center-text">{{beer.rating}}</div>
           <!-- <button class="button button-balanced" ng-click="rate()">Rate!</button> -->
+        </div>
+      </div>
+      <div class="dropdownCard">
+        <div class="dropdownDescription">
+          {{beer.description}}
         </div>
       </div>
     </div>

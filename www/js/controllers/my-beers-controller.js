@@ -1,9 +1,26 @@
 let MyBeersController = function ($scope, BeerService, FirebaseService) {
 
-    // $scope.$on('$ionicView.beforeEnter', function () {
+    $scope.$on('$ionicView.beforeEnter', function () {
         // update campaigns everytime the view becomes active
         // (on first time added to DOM and after the view becomes active after cached
       
+        $scope.toggleBigCard = function ($event) {
+
+            let cT = $event.currentTarget;
+
+            console.log('cT', cT);
+
+            if ($(cT).next().hasClass('showCard')) {
+                $(cT).next().addClass('hideCard');
+                $(cT).next().removeClass('showCard');
+            } else if ($(cT).next().hasClass('hideCard')) {
+                $(cT).next().addClass('showCard');
+                $(cT).next().removeClass('hideCard');
+            } else {
+                $(cT).next().addClass('showCard');
+            }
+        };
+
         console.log('how many times is this loading');
         $scope.myBeerList = '';
     
@@ -18,7 +35,7 @@ let MyBeersController = function ($scope, BeerService, FirebaseService) {
             });
             $scope.myBeerList = data.data;
         });
-    // });
+    });
 
 
 };
