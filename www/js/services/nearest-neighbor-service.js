@@ -1,4 +1,4 @@
-let NearestNeighborService = function($timeout, $q, FirebaseService, BeerService, $window) {
+let NearestNeighborService = function($timeout, $window, $q, FirebaseService, BeerService, $window) {
 
     // let params = ['abv', 'ibu', 'srmId', 'ogMin', 'fgAvg'];
 
@@ -15,14 +15,24 @@ let NearestNeighborService = function($timeout, $q, FirebaseService, BeerService
 
     //     }
     // };
+    let beersListIDs; 
+
+    const setBeerListIDs = function(list) {
+        $window.localStorage.setItem('listIDs', list);
+    };
+
+    const getBeerListIDs = function() {
+        return beersListIDs;
+    };
 
     const splitUnratedAndRated = function(obj) {
 
         // This first part is just setup for testing. Will get a string from QR Code that will look like setupAllBeers.
-        let setupAlreadyRatedBeers = 'fu2qgB\nZoBIHx\naMyzLn\ns5lxSd\nsCgeAO\nuzOl1k\nd9iNtl\nIH5ajM\n1RvWY5\ncdkpyx';
-        let setupUnratedBeers = 'KhYQ9T\nL3Juq0\n5WWDVq\nksF9st\nsiPwY9\nOwh80E\niwiRoK\ncG6leo\nChfN0e\neke8de\nfdaHy4\nH61Gte\nBon4k4';
-        let setupAllBeers = 'fu2qgB\nZoBIHx\naMyzLn\ns5lxSd\nsCgeAO\nuzOl1k\nd9iNtl\nIH5ajM\n1RvWY5\ncdkpyx\nKhYQ9T\nL3Juq0\n5WWDVq\nksF9st\nsiPwY9\nOwh80E\niwiRoK\nChfN0e\neke8de\nfdaHy4\nH61Gte\nBon4k4';
+        // let setupAlreadyRatedBeers = 'fu2qgB\nZoBIHx\naMyzLn\ns5lxSd\nsCgeAO\nuzOl1k\nd9iNtl\nIH5ajM\n1RvWY5\ncdkpyx';
+        // let setupUnratedBeers = 'KhYQ9T\nL3Juq0\n5WWDVq\nksF9st\nsiPwY9\nOwh80E\niwiRoK\ncG6leo\nChfN0e\neke8de\nfdaHy4\nH61Gte\nBon4k4';
+        // let setupAllBeers = 'fu2qgB\nZoBIHx\naMyzLn\ns5lxSd\nsCgeAO\nuzOl1k\nd9iNtl\nIH5ajM\n1RvWY5\ncdkpyx\nKhYQ9T\nL3Juq0\n5WWDVq\nksF9st\nsiPwY9\nOwh80E\niwiRoK\nChfN0e\neke8de\nfdaHy4\nH61Gte\nBon4k4';
 
+        let setupAllBeers = $window.localStorage.getItem('listIDs');
 
         // Split string by carriage return
         let split = setupAllBeers.split('\n');
@@ -156,6 +166,7 @@ let NearestNeighborService = function($timeout, $q, FirebaseService, BeerService
             onlyTestParams[keys[index]].name = oneBeer.name;
             onlyTestParams[keys[index]].labels = oneBeer.labels;
             onlyTestParams[keys[index]].description = oneBeer.description;
+            onlyTestParams[keys[index]].style = oneBeer.style;
             if (status) {
                 onlyTestParams[keys[index]].rating = oneBeer.rating;
             }
@@ -455,7 +466,7 @@ let NearestNeighborService = function($timeout, $q, FirebaseService, BeerService
     };
     
 
-    return { getUnratedInfo, splitUnratedAndRated, onlyTestParamsFunction, normalizeUnratedBeers, normalizeRatedBeers, compareNormalizedData, getSuggestions, createSuggestedBeersObject };
+    return { getUnratedInfo, splitUnratedAndRated, onlyTestParamsFunction, normalizeUnratedBeers, normalizeRatedBeers, compareNormalizedData, getSuggestions, createSuggestedBeersObject, getBeerListIDs, setBeerListIDs };
 
 };
 

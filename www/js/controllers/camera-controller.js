@@ -1,6 +1,6 @@
 
 
-let CameraController = function ($scope, $window, $timeout, $cordovaBarcodeScanner, $cordovaCamera, FirebaseService, BeerService) {
+let CameraController = function ($scope, $state, $window, $timeout, $cordovaBarcodeScanner, $cordovaCamera, FirebaseService, BeerService, NearestNeighborService) {
 
     $scope.beerSearch = function() {
         BeerService.beerDBTest()
@@ -32,12 +32,11 @@ let CameraController = function ($scope, $window, $timeout, $cordovaBarcodeScann
         $cordovaBarcodeScanner.scan()
         .then((data) => {
             console.log("data", data);
-            let beers = data.text.split('\n');
+            let beers = data.text;
             console.log("beers: ", beers);
 
-            $(beers).each((index, item) => {
-                $('#displayText').append(item + '<br>');
-            });
+            NearestNeighborService.setBeerListIDs(beers);
+            $state.go('app.brews.suggestions');
         })
         .catch((error) => {
             console.log("error", error);

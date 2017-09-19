@@ -1,5 +1,15 @@
-let SuggestionsController = function ($scope, $window, BeerService, FirebaseService, NearestNeighborService) {
+let SuggestionsController = function ($scope, $window, $ionicLoading, BeerService, FirebaseService, NearestNeighborService) {
     // $scope.$on('$ionicView.beforeEnter', function () {
+
+        $ionicLoading.show({
+            content: 'Loading',
+            animation: 'fade-in',
+            template: '<ion-spinner icon="ripple"></ion-spinner>',
+            showBackdrop: true,
+            maxWidth: 200,
+            showDelay: 0
+        });
+
 
         // -KuFl-i0lXCsoyJpGg0Y
         // This will be gotten from local storage and set when user logs in
@@ -24,7 +34,6 @@ let SuggestionsController = function ($scope, $window, BeerService, FirebaseServ
             // USE THIS TO SHOW HIGHEST RATED ON CURRENT BEER MENU
             let ratedBeersUntouched = split[1];
 
-            console.log('ratedBeersUntouched', ratedBeersUntouched);
 
             // Get correct Test Params for comparison
             let ratedBeers = NearestNeighborService.onlyTestParamsFunction(allMyBeers, true);
@@ -42,8 +51,15 @@ let SuggestionsController = function ($scope, $window, BeerService, FirebaseServ
 
                 let unratedBeersToShow = NearestNeighborService.createSuggestedBeersObject(suggestions, unratedBeers);
 
+                let keys = Object.keys(unratedBeersToShow);
+                $(keys).each((index, item) => {
+                    if (unratedBeersToShow[item].labels === undefined) {
+                        unratedBeersToShow[item].labels = {icon: '../img/pint_glass.jpg', medium: '../img/pint_glass.jpg', large: '../img/pint_glass.jpg'}
+                    }
+                });
 
                 $scope.someBrews = unratedBeersToShow;
+                $ionicLoading.hide();
             });
         });
 

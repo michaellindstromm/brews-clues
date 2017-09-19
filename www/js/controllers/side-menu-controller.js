@@ -1,4 +1,4 @@
-let SideMenuController = function ($scope, $timeout, $state, AuthService) {
+let SideMenuController = function ($scope, $cordovaBarcodeScanner, $timeout, $state, AuthService) {
 
   $scope.logout = function() {
     AuthService.logout();
@@ -7,6 +7,22 @@ let SideMenuController = function ($scope, $timeout, $state, AuthService) {
 
   $scope.goToSuggestions = function() {
     $state.go('app.brews.suggestions');
+  };
+
+  $scope.scan = function () {
+
+    $cordovaBarcodeScanner.scan()
+      .then((data) => {
+        console.log("data", data);
+        let beers = data.text;
+        console.log("beers: ", beers);
+
+        NearestNeighborService.setBeerListIDs(beers);
+        $state.go('app.brews.suggestions');
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
   };
 };
 

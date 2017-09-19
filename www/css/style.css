@@ -83,3 +83,7 @@ input {
 .ion-chevron-left {
     color: #646464 !important;
 }
+
+ion-tabs {
+    color: red !important;
+}
