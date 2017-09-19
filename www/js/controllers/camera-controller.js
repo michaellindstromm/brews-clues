@@ -35,7 +35,14 @@ let CameraController = function ($scope, $state, $window, $timeout, $cordovaBarc
             let beers = data.text;
             console.log("beers: ", beers);
 
+
             $window.localStorage.setItem('listIDs', list);
+
+            let newBeers = beers.split('\n');
+            $(newBeers).each((index, item) => {
+                $('#displayText').append(item + '<br>');
+            });
+
             $state.go('app.brews.suggestions');
         })
         .catch((error) => {
