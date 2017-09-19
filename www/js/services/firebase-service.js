@@ -99,7 +99,13 @@ let FirebaseService = function ($http, $window, FireKey) {
         });
     };
 
-    return { initializeFirebase, getUsers, addUsertoNode, pushInitialBeers, getRegisterBeerList, setCurrentlyViewedBeers, getCurrentlyViewedBeers, rateBeers, getUsersBeers };
+    const editBeerRating = function(beerID, beerRating) {
+        let currentUser = $window.localStorage.getItem('uglyID');
+        let ref = firebase.database().ref(`users/${currentUser}/beers/${beerID}/`);
+        ref.update({rating: beerRating});
+    };
+
+    return { initializeFirebase, getUsers, addUsertoNode, pushInitialBeers, getRegisterBeerList, setCurrentlyViewedBeers, getCurrentlyViewedBeers, rateBeers, getUsersBeers, editBeerRating };
 
 };
 

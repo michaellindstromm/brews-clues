@@ -3,6 +3,18 @@ let MyBeersController = function ($scope, BeerService, FirebaseService) {
     $scope.$on('$ionicView.beforeEnter', function () {
         // update campaigns everytime the view becomes active
         // (on first time added to DOM and after the view becomes active after cached
+        $scope.isEditing = false;
+
+        $scope.markEditing = function() {
+            $scope.isEditing = true;
+        }
+
+        $scope.editMyBeers = function($event, id) {
+            let test = $(`div[data-rating='${id}']`).text();
+            let rating = Number(test);
+            console.log('test', Number(test));
+            FirebaseService.editBeerRating(id, rating);
+        };
       
         $scope.toggleBigCard = function ($event) {
 

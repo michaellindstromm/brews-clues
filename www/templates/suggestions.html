@@ -18,7 +18,7 @@
             <div class="center-text beerName">{{beer.name}}</div>
             <div class="center-text">{{beer.style.shortName}}</div>
             <div class="ratingOutputDiv">
-              <div class="ratingOutput center-text">{{beerRating}}</div>
+              <div data-beer-rating="{{beer.id}}" class="ratingOutput center-text">{{beerRating}}</div>
             </div>
           </div>
   
@@ -28,11 +28,16 @@
             </div>
             <div class="list rangeRater">
               <div class="item range range-positive">
-                <i class="icon ion-thumbsdown"></i>
-                <input class="slide" type="range" name="beerRating" step="5" min="0" max="100" value="0" id="beerRatingRange" ng-model="beerRating">
-                <i class="icon ion-thumbsup"></i>
+                <i class="icon ion-thumbsdown" ng-click="addOrEdit($event, key)"></i>
+                <input class="slide userRateRangeInput" type="range" name="beerRating" step="5" min="0" max="100" value="0" id="beerRatingRange" ng-model="beerRating">
+                <i class="icon ion-thumbsup" ng-click="addOrEdit($event, key)"></i>
               </div>
             </div>
+          </div>
+
+        
+          <div class="testDisplay">
+
           </div>
   
         </div>

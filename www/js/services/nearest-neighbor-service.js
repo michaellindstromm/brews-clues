@@ -76,7 +76,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
 
     
     const getUnratedInfo = function(beers) {
-
         return $q((resolve, reject) => {
 
             let keys = Object.keys(beers);
@@ -102,6 +101,7 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
     
             // array.reduce to create object of objects
                let singleObj = flatten.reduce((obj, item) => {
+                   console.log('item', item);
                    obj[item.id] = item;
                    return obj;
                }, {});
