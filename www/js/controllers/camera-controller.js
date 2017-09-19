@@ -1,6 +1,6 @@
 
 
-let CameraController = function ($scope, $state, $window, $timeout, $cordovaBarcodeScanner, $cordovaCamera, FirebaseService, BeerService, NearestNeighborService) {
+let CameraController = function ($scope, $state, $window, $timeout, $cordovaBarcodeScanner, $cordovaCamera, FirebaseService, BeerService) {
 
     $scope.beerSearch = function() {
         BeerService.beerDBTest()
@@ -35,7 +35,7 @@ let CameraController = function ($scope, $state, $window, $timeout, $cordovaBarc
             let beers = data.text;
             console.log("beers: ", beers);
 
-            NearestNeighborService.setBeerListIDs(beers);
+            $window.localStorage.setItem('listIDs', list);
             $state.go('app.brews.suggestions');
         })
         .catch((error) => {

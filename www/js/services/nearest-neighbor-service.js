@@ -15,15 +15,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
 
     //     }
     // };
-    let beersListIDs; 
-
-    const setBeerListIDs = function(list) {
-        $window.localStorage.setItem('listIDs', list);
-    };
-
-    const getBeerListIDs = function() {
-        return beersListIDs;
-    };
 
     const splitUnratedAndRated = function(obj) {
 
