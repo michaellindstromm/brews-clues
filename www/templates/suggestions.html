@@ -7,32 +7,71 @@
           {{beer.name}}
         </div>
       </div> -->
+      <div class="newBeersSuggestions">
 
-      <div class="list card eachBeerCard" ng-repeat="(key, beer) in someBrews">
-
-        <div class="item item-avatar beerRatingCard p-0" id="{{beer.id}}" ng-click="toggleBigCard($event)">
-          <img src={{beer.labels.icon}}>
-          <div class="center-text beerName">{{beer.name}}</div>
-          <div class="center-text">{{beer.style.shortName}}</div>
-          <div class="ratingOutputDiv">
-            <div class="ratingOutput center-text">{{beerRating}}</div>
+        <h2 ng-if="isLoaded" class="suggTitle">New Beers</h2>
+  
+        <div class="list card eachBeerCard" ng-repeat="(key, beer) in someBrews">
+  
+          <div class="item item-avatar beerRatingCard p-0" id="{{beer.id}}" ng-click="toggleBigCard($event)">
+            <img src={{beer.labels.icon}}>
+            <div class="center-text beerName">{{beer.name}}</div>
+            <div class="center-text">{{beer.style.shortName}}</div>
+            <div class="ratingOutputDiv">
+              <div class="ratingOutput center-text">{{beerRating}}</div>
+            </div>
           </div>
+  
+          <div class="dropdownCard">
+            <div class="dropdownDescription">
+              {{beer.description}}
+            </div>
+            <div class="list rangeRater">
+              <div class="item range range-positive">
+                <i class="icon ion-thumbsdown"></i>
+                <input class="slide" type="range" name="beerRating" step="5" min="0" max="100" value="0" id="beerRatingRange" ng-model="beerRating">
+                <i class="icon ion-thumbsup"></i>
+              </div>
+            </div>
+          </div>
+  
         </div>
 
-        <div class="dropdownCard">
-          <div class="dropdownDescription">
-            {{beer.description}}
+      </div>
+
+      <div class="myBeersSuggestions">
+
+        <h2 ng-if="isLoaded" class="suggTitle">My Beers</h2>
+        <div class="list card eachBeerCard" ng-repeat="(key, beer) in myBrews">
+  
+          <div class="item item-avatar beerRatingCard p-0" id="{{beer.id}}" ng-click="toggleBigCard($event)">
+            <img src={{beer.labels.icon}}>
+            <div class="center-text beerName">{{beer.name}}</div>
+            <div class="center-text">{{beer.style.shortName}}</div>
+            <div class="ratingOutputDiv">
+              <div class="ratingOutput center-text">{{beer.rating}}</div>
+            </div>
           </div>
-          <div class="list rangeRater">
-            <div class="item range range-positive">
-              <i class="icon ion-thumbsdown"></i>
-              <input class="slide" type="range" name="beerRating" step="5" min="0" max="100" value="0" id="beerRatingRange" ng-model="beerRating">
-              <i class="icon ion-thumbsup"></i>
+        
+          <div class="dropdownCard">
+            <div class="dropdownDescription">
+              {{beer.description}}
             </div>
           </div>
         </div>
 
       </div>
+
+      <div class="wildcardSuggestions">
+
+        <h2 ng-if="isLoaded" class="suggTitle">Wildcard</h2>
+        <div class="beerImageDiv" ng-if="isLoaded">
+          <img src="../img/BIGBEER.png" alt="" width="250px" height="300px" class="beerImage">
+
+        </div>
+
+      </div>
+      
   
   </ion-content>
 </ion-view>

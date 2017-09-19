@@ -1,9 +1,11 @@
 let SuggestionsController = function ($scope, $window, $ionicLoading, BeerService, FirebaseService, NearestNeighborService) {
+    $scope.isLoaded = false;
     $scope.$on('$ionicView.beforeEnter', function () {
-
         $scope.toggleBigCard = function($event) {
   
             let cT = $event.currentTarget;
+
+            console.log('cT', cT);
 
             if ($(cT).next().hasClass('showCard')) {
                 $(cT).next().addClass('hideCard');
@@ -73,6 +75,18 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
                     }
                 });
 
+                console.log('ratedBeersUntouch', ratedBeersUntouched);
+
+                let top5RatedOnList = [];
+
+                for (var i = 0; i < 5; i++) {
+                    var element = ratedBeersUntouched[i];
+                    top5RatedOnList.push(element);
+                }
+
+                $scope.isLoaded = true;
+
+                $scope.myBrews = top5RatedOnList;
                 $scope.someBrews = unratedBeersToShow;
                 $ionicLoading.hide();
             });
