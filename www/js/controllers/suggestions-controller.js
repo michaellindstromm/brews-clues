@@ -1,5 +1,5 @@
 let SuggestionsController = function ($scope, $window, $ionicLoading, BeerService, FirebaseService, NearestNeighborService) {
-    // $scope.$on('$ionicView.beforeEnter', function () {
+    $scope.$on('$ionicView.beforeEnter', function () {
 
         $ionicLoading.show({
             content: 'Loading',
@@ -63,7 +63,7 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
             });
         });
 
-    // });
+    });
 
 };
 
