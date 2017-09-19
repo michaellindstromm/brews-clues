@@ -36,7 +36,7 @@ let CameraController = function ($scope, $state, $window, $timeout, $cordovaBarc
             console.log("beers: ", beers);
 
 
-            $window.localStorage.setItem('listIDs', list);
+            $window.localStorage.setItem('listIDs', beers);
 
             let newBeers = beers.split('\n');
             $(newBeers).each((index, item) => {
