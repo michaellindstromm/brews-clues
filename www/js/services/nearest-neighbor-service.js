@@ -457,7 +457,7 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
     };
     
 
-    return { getUnratedInfo, splitUnratedAndRated, onlyTestParamsFunction, normalizeUnratedBeers, normalizeRatedBeers, compareNormalizedData, getSuggestions, createSuggestedBeersObject, getBeerListIDs, setBeerListIDs };
+    return { getUnratedInfo, splitUnratedAndRated, onlyTestParamsFunction, normalizeUnratedBeers, normalizeRatedBeers, compareNormalizedData, getSuggestions, createSuggestedBeersObject };
 
 };
 
