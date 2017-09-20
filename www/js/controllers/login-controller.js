@@ -3,6 +3,8 @@ let LoginController = function (AuthService, FirebaseService, NearestNeighborSer
     console.log("isloggedin", $rootScope.isLoggedIn())
     console.log('local', $window.localStorage.getItem('uglyID'));
 
+    $window.localStorage.removeItem('uglyID');
+
     // $('#loginEmail').val('');
     // $('#loginPass').val('');
 

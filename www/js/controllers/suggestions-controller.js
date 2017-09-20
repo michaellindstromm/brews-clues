@@ -1,7 +1,6 @@
 let SuggestionsController = function ($scope, $window, $ionicLoading, BeerService, FirebaseService, NearestNeighborService) {
     $scope.isLoaded = false;
 
-    $window.localStorage.setItem('uglyID', '-KuV9QPVszDorbtFsVqR');
     $scope.$on('$ionicView.beforeEnter', function () {
         
         
@@ -57,12 +56,6 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
             maxWidth: 200,
             showDelay: 0
         });
-        
-        
-        // -KuFl-i0lXCsoyJpGg0Y
-        // This will be gotten from local storage and set when user logs in
-        // $window.localStorage.setItem('uglyID', '-KuFl-i0lXCsoyJpGg0Y');
-        // console.log('userlocal', $window.localStorage.getItem('uglyID'));
         
         $scope.beerSuggestions = '';
         
