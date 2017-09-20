@@ -12,6 +12,7 @@
     height: 100%;
     position: absolute;
     transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
     transition: transform 1.6s;
 }
 
@@ -23,15 +24,17 @@
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    transition: backface-visibility 1s;
+    -webkit-backface-visibility: hidden;
 }
 
 .back {
     transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
 }
 
 .flipper.flipped {
     transform: rotateY(360deg);
+    -webkit-transform: rotateY(360deg);
 }
 
 .button-energized {
