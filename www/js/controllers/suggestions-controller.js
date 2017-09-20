@@ -1,5 +1,7 @@
 let SuggestionsController = function ($scope, $window, $ionicLoading, BeerService, FirebaseService, NearestNeighborService) {
     $scope.isLoaded = false;
+
+    $window.localStorage.setItem('uglyID', '-KuV9QPVszDorbtFsVqR');
     $scope.$on('$ionicView.beforeEnter', function () {
         
         
