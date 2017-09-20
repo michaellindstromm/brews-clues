@@ -1,4 +1,4 @@
-let RegistrationController = function ($scope, $state, AuthService, FirebaseService) {
+let RegistrationController = function ($scope, $window, $state, AuthService, FirebaseService) {
 
     $('#firstPass').on('keyup', (e) => {
 
@@ -64,6 +64,7 @@ let RegistrationController = function ($scope, $state, AuthService, FirebaseServ
                     }
 
                     FirebaseService.addUsertoNode(newUser);
+                    $window.localStorage.removeItem('listIDs');
                     $state.go('registerBeers');
                     
                 });

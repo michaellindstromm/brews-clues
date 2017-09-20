@@ -58,68 +58,74 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
         });
         
         $scope.beerSuggestions = '';
-        
-        FirebaseService.getUsersBeers()
-        .then((response) => {
-            
-            // All my beers
-            let allMyBeers = response.data;
-            
-            // Split b/w unrated and already rated beers
-            let split = NearestNeighborService.splitUnratedAndRated(allMyBeers);
-            
-            // IDs = all of the unrated beers
-            let IDs = split[0];
-            
-            // ratedBeers = rated beers on list sorted in ascending order by rating
-            // USE THIS TO SHOW HIGHEST RATED ON CURRENT BEER MENU
-            let ratedBeersUntouched = split[1];
-            
-            
-            // Get correct Test Params for comparison
-            let ratedBeers = NearestNeighborService.onlyTestParamsFunction(allMyBeers, true);
-            
-            
-            // Get unrated beers correct test params info
-            NearestNeighborService.getUnratedInfo(IDs)
-            .then((unratedBeers) => {
-                FirebaseService.setUnratedBeers(unratedBeers);
 
-                let normalizedUnrated = NearestNeighborService.normalizeUnratedBeers(ratedBeers, unratedBeers);
+        if ($window.localStorage.getItem('listIDs') === null) {
+            $ionicLoading.hide();
+        } else {
+            FirebaseService.getUsersBeers()
+            .then((response) => {
                 
-                let normalizedRated = NearestNeighborService.normalizeRatedBeers(ratedBeers);
+                // All my beers
+                let allMyBeers = response.data;
                 
-                let eucVals = NearestNeighborService.compareNormalizedData(normalizedRated, normalizedUnrated, ratedBeersUntouched);
+                // Split b/w unrated and already rated beers
+                let split = NearestNeighborService.splitUnratedAndRated(allMyBeers);
                 
-                let suggestions = NearestNeighborService.getSuggestions(eucVals);
+                // IDs = all of the unrated beers
+                let IDs = split[0];
                 
-                let unratedBeersToShow = NearestNeighborService.createSuggestedBeersObject(suggestions, unratedBeers);
+                // ratedBeers = rated beers on list sorted in ascending order by rating
+                // USE THIS TO SHOW HIGHEST RATED ON CURRENT BEER MENU
+                let ratedBeersUntouched = split[1];
                 
-                let keys = Object.keys(unratedBeersToShow);
-                $(keys).each((index, item) => {
-                    if (unratedBeersToShow[item].labels === undefined) {
-                        unratedBeersToShow[item].labels = {icon: '../img/pint_glass.jpg', medium: '../img/pint_glass.jpg', large: '../img/pint_glass.jpg'}
+                
+                // Get correct Test Params for comparison
+                let ratedBeers = NearestNeighborService.onlyTestParamsFunction(allMyBeers, true);
+                
+                
+                // Get unrated beers correct test params info
+                NearestNeighborService.getUnratedInfo(IDs)
+                .then((unratedBeers) => {
+                    FirebaseService.setUnratedBeers(unratedBeers);
+    
+                    let normalizedUnrated = NearestNeighborService.normalizeUnratedBeers(ratedBeers, unratedBeers);
+                    
+                    let normalizedRated = NearestNeighborService.normalizeRatedBeers(ratedBeers);
+                    
+                    let eucVals = NearestNeighborService.compareNormalizedData(normalizedRated, normalizedUnrated, ratedBeersUntouched);
+                    
+                    let suggestions = NearestNeighborService.getSuggestions(eucVals);
+                    
+                    let unratedBeersToShow = NearestNeighborService.createSuggestedBeersObject(suggestions, unratedBeers);
+                    
+                    let keys = Object.keys(unratedBeersToShow);
+                    $(keys).each((index, item) => {
+                        if (unratedBeersToShow[item].labels === undefined) {
+                            unratedBeersToShow[item].labels = {icon: '../img/pint_glass.jpg', medium: '../img/pint_glass.jpg', large: '../img/pint_glass.jpg'}
+                        }
+                    });
+                    
+                    console.log('ratedBeersUntouch', ratedBeersUntouched);
+                    
+                    let top5RatedOnList = [];
+                    
+                    for (var i = 0; i < 5; i++) {
+                        var element = ratedBeersUntouched[i];
+                        top5RatedOnList.push(element);
                     }
+                    
+                    $scope.isLoaded = true;
+                    
+                    $scope.myBrews = top5RatedOnList;
+                    $scope.someBrews = unratedBeersToShow;
+                    $ionicLoading.hide();
+    
+    
                 });
-                
-                console.log('ratedBeersUntouch', ratedBeersUntouched);
-                
-                let top5RatedOnList = [];
-                
-                for (var i = 0; i < 5; i++) {
-                    var element = ratedBeersUntouched[i];
-                    top5RatedOnList.push(element);
-                }
-                
-                $scope.isLoaded = true;
-                
-                $scope.myBrews = top5RatedOnList;
-                $scope.someBrews = unratedBeersToShow;
-                $ionicLoading.hide();
-
-
             });
-        });
+
+        }
+        
         
     });
     

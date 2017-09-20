@@ -1,7 +1,8 @@
 let LoginController = function (AuthService, FirebaseService, NearestNeighborService, $ionicLoading, $window, $timeout, $scope, $state, $rootScope ) {
     
-    console.log("isloggedin", $rootScope.isLoggedIn())
-    console.log('local', $window.localStorage.getItem('uglyID'));
+    // console.log("isloggedin", $rootScope.isLoggedIn())
+    // console.log('local', $window.localStorage.getItem('uglyID'));
+    $window.localStorage.removeItem('uglyID');
 
     // $('#loginEmail').val('');
     // $('#loginPass').val('');
