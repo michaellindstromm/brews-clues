@@ -1,5 +1,7 @@
 let RegistrationController = function ($scope, $window, $state, AuthService, FirebaseService) {
 
+
+    
     $('#firstPass').on('keyup', (e) => {
 
         if (e.target.value.length === 0) {
@@ -24,6 +26,7 @@ let RegistrationController = function ($scope, $window, $state, AuthService, Fir
     });
 
     $scope.register = function (email, password) {
+        $window.localStorage.removeItem('uglyID');
         let firstPass = $('#firstPass').val();
         let repeatPass = $('#repeatPass').val();
         let registerEmail = $('#registerEmail').val();
