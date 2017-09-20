@@ -1,5 +1,39 @@
 /* Empty. Add your own CSS if you like */
 
+.flip-container {
+    width: 300px;
+    height: 250px;
+    position: relative;
+    perspective: 800px;
+}
+
+.flipper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 1.6s;
+}
+
+.front,
+.back {
+    margin: 0 auto;
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transition: backface-visibility 1s;
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+.flipper.flipped {
+    transform: rotateY(360deg);
+}
+
 .button-energized {
     display: block;
     margin: 4rem auto;
@@ -19,6 +53,10 @@ input {
     margin: 0 auto;
     margin-top: 2rem;
     width: 90%;
+}
+
+.item {
+    border: none !important;
 }
 
 .range-positive {
@@ -89,7 +127,9 @@ input {
     height: 250px;
     width: 300px;
     margin: 0 auto;
-    border: none !important;
+    padding-top: 1rem;
+    /* border-left: 20px solid rgba(68, 68, 68, 0.09);
+    border-right: 20px solid rgba(68, 68, 68, 0.09);  */
 }
 
 .dropdownCard {
@@ -98,12 +138,12 @@ input {
 
 .showCard {
     height: 300px;
-    transition: height 0.5s ease-in;
+    transition: height .8s ease-in;
 }
 
 .hideCard {
     height: 0px;
-    transition: height 0.5s ease-in;
+    transition: height .8s ease-in;
 }
 
 .wildcardSuggestions {
@@ -118,5 +158,14 @@ input {
 .beerImage {
     display: block;
     margin-left: 25%;
+}
+
+.ion-thumbsdown,
+.ion-thumbsup {
+    font-size: 30px !important;
+}
+
+.eachBeerCard {
+    box-shadow: 1px 2px #ddd !important;
 }
 

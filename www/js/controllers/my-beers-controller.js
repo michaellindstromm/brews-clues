@@ -1,28 +1,34 @@
-let MyBeersController = function ($scope, BeerService, FirebaseService) {
-
+let MyBeersController = function ($scope, $window, BeerService, FirebaseService) {
+    $window.localStorage.setItem('uglyID', '-KuFl-i0lXCsoyJpGg0Y');
     $scope.$on('$ionicView.beforeEnter', function () {
         // update campaigns everytime the view becomes active
         // (on first time added to DOM and after the view becomes active after cached
-        $scope.isEditing = false;
+        
 
-        $scope.markEditing = function() {
-            $scope.isEditing = true;
+        $scope.markEditing = function(id) {
+            $(`div[data-rating='${id}old']`).addClass('ng-hide');
+            $(`div[data-rating='${id}old']`).removeClass('ng-show');
+            $(`div[data-rating='${id}new']`).addClass('ng-show');
+            $(`div[data-rating='${id}new']`).removeClass('ng-hide');
         }
 
         $scope.editMyBeers = function($event, id) {
-            let test = $(`div[data-rating='${id}']`).text();
+            let test = $(`div[data-rating='${id}new']`).text();
             let rating = Number(test);
             console.log('test', Number(test));
             FirebaseService.editBeerRating(id, rating);
         };
       
-        $scope.toggleBigCard = function ($event) {
+        $scope.toggleBigCard = function ($event, id) {
+
+            $(`.flipper${id}`).addClass('flipped');
 
             let cT = $event.currentTarget;
 
             console.log('cT', cT);
 
             if ($(cT).next().hasClass('showCard')) {
+                $(`.flipper${id}`).removeClass('flipped');
                 $(cT).next().addClass('hideCard');
                 $(cT).next().removeClass('showCard');
             } else if ($(cT).next().hasClass('hideCard')) {

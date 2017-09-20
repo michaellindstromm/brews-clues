@@ -4,25 +4,32 @@
 
     <div class="list card eachBeerCard" ng-repeat="(key, beer) in myBeerList">
 
-      <div class="item item-avatar beerRatingCard p-0" id="{{beer.id}}" ng-click="toggleBigCard($event)">
+      <div class="item item-avatar beerRatingCard p-0" id="{{beer.id}}" ng-click="toggleBigCard($event, key)">
         <img src={{beer.labels.icon}}>
         <div class="center-text beerName">{{beer.name}}</div>
         <div class="center-text">{{beer.style.shortName}}</div>
         <div class="ratingOutputDiv">
-          <div class="ratingOutput center-text" ng-if="!isEditing" data-rating="{{beer.id}}">{{beer.rating}}</div>
-          <div class="ratingOutput center-text" ng-if="isEditing" data-rating="{{beer.id}}">{{beerRating}}</div>
+          <div class="ratingOutput center-text ng-show" data-rating="{{beer.id}}old">{{beer.rating}}</div>
+          <div class="ratingOutput center-text ng-hide" data-rating="{{beer.id}}new">{{beerRating}}</div>
           <!-- <button class="button button-balanced" ng-click="rate()">Rate!</button> -->
         </div>
       </div>
       <div class="dropdownCard">
-        <div class="dropdownDescription">
-          {{beer.description}}
+        <div class="flip-container">
+          <div class="flipper flipper{{key}}">
+            <div class="dropdownDescription front">
+              {{beer.description}}
+            </div>
+            <div class="back">
+                <img src="../img/pint_glass.jpg" alt="" width="300px" height="250px">
+            </div>
+          </div>
         </div>
         <div class="list rangeRater">
           <div class="item range range-positive">
             <i class="icon ion-thumbsdown" ng-click="editMyBeers($event, key)"></i>
             <input class="slide userRateRangeInput" type="range" name="beerRating" step="5" min="0" max="100" value="0" id="beerRatingRange"
-              ng-model="beerRating" ng-change="markEditing()">
+              ng-model="beerRating" ng-change="markEditing(key)">
             <i class="icon ion-thumbsup" ng-click="editMyBeers($event, key)"></i>
           </div>
         </div>
