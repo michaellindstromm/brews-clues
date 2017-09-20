@@ -39,7 +39,7 @@ let FirebaseService = function ($http, $window, FireKey) {
     // *****************************************************************************
 
     const rateBeers = function() {
-        let beers = currentlyViewedBeers;
+        let beers = getCurrentlyViewedBeers();
         let beerObj = {};
         $(beers).each((index, item) => {
             if (item.hasOwnProperty('rating')) {
@@ -48,6 +48,7 @@ let FirebaseService = function ($http, $window, FireKey) {
         });
 
         let localUser = $window.localStorage.getItem('uglyID');
+        console.log('localUser', localUser);
 
         firebase.database().ref(`/users/${localUser}/beers`).set(beerObj);
     };
