@@ -1,5 +1,4 @@
 let MyBeersController = function ($scope, $window, BeerService, FirebaseService) {
-    $window.localStorage.setItem('uglyID', '-KuFl-i0lXCsoyJpGg0Y');
     $scope.$on('$ionicView.beforeEnter', function () {
         // update campaigns everytime the view becomes active
         // (on first time added to DOM and after the view becomes active after cached

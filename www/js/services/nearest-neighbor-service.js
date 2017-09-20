@@ -78,6 +78,8 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
     const getUnratedInfo = function(beers) {
         return $q((resolve, reject) => {
 
+        
+            // ACTUALY CODE!!!!
             let keys = Object.keys(beers);
     
             let promises = [];
@@ -92,7 +94,7 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
     
                 promises.push(promise);
             });
-    
+
             $q.all(promises).then((response) => {
     
             // ARRAY METHODS!

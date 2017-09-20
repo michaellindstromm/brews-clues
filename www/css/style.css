@@ -1,4 +1,4 @@
-/* Empty. Add your own CSS if you like */
+/* Empty. Add your own CSS if you like
 
 .flip-container {
     width: 300px;
@@ -35,7 +35,7 @@
 .flipper.flipped {
     transform: rotateY(360deg);
     -webkit-transform: rotateY(360deg);
-}
+} */
 
 .button-energized {
     display: block;
@@ -58,9 +58,6 @@ input {
     width: 90%;
 }
 
-.item {
-    border: none !important;
-}
 
 .range-positive {
     border: none;
@@ -103,6 +100,7 @@ input {
 
 .beerRatingCard {
     padding: 0;
+    border: none !important;
 }
 
 .p-0 {
@@ -137,6 +135,7 @@ input {
 
 .dropdownCard {
     height: 0px;
+    border: none !important;
 }
 
 .showCard {

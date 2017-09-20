@@ -3,6 +3,33 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
     $scope.$on('$ionicView.beforeEnter', function () {
         
         
+        $scope.addOrEdit = ($event, id) => {
+            FirebaseService.getUsersBeers()
+            .then((data) => {
+                let userBeers = data.data;
+                let keys = Object.keys(userBeers);
+                if (keys.indexOf(id) === -1) {
+                    let beerObj = {};
+                    let unrated = FirebaseService.getUnratedBeers();
+                    let beerToAdd = unrated[id];
+                    beerObj[beerToAdd.id] = beerToAdd;
+                    let test = $(`div[data-beer-rating='${id}']`).text();
+                    console.log('test', test);
+                    let userRating = Number(test);
+                    console.log('userRating', userRating);
+                    beerObj[id].rating = userRating;
+                    
+                    FirebaseService.addSuggestedBeerToUserFirebase(beerObj);
+                } else {
+                    let test = $(`div[data-beer-rating='${id}']`).text();
+                    let rating = Number(test);
+                    console.log('test', Number(test));
+                    FirebaseService.editBeerRating(id, rating);
+                }
+            });
+            
+        };
+
         $scope.toggleBigCard = function($event) {
             
             let cT = $event.currentTarget;
@@ -32,8 +59,8 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
         
         // -KuFl-i0lXCsoyJpGg0Y
         // This will be gotten from local storage and set when user logs in
-        $window.localStorage.setItem('uglyID', '-KuFl-i0lXCsoyJpGg0Y');
-        console.log('userlocal', $window.localStorage.getItem('uglyID'));
+        // $window.localStorage.setItem('uglyID', '-KuFl-i0lXCsoyJpGg0Y');
+        // console.log('userlocal', $window.localStorage.getItem('uglyID'));
         
         $scope.beerSuggestions = '';
         
@@ -57,9 +84,12 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
             // Get correct Test Params for comparison
             let ratedBeers = NearestNeighborService.onlyTestParamsFunction(allMyBeers, true);
             
+            
             // Get unrated beers correct test params info
             NearestNeighborService.getUnratedInfo(IDs)
             .then((unratedBeers) => {
+                FirebaseService.setUnratedBeers(unratedBeers);
+
                 let normalizedUnrated = NearestNeighborService.normalizeUnratedBeers(ratedBeers, unratedBeers);
                 
                 let normalizedRated = NearestNeighborService.normalizeRatedBeers(ratedBeers);
@@ -96,7 +126,7 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
             });
         });
         
-    })
+    });
     
     
 };

@@ -4,6 +4,35 @@
     <!-- <a class="button button-energized" href="#/app/singleBrew">Single Brew</a> -->
     <button class="button button-energized searchBeersBtn" ng-click="search(beerSearchInput)">Search Beers</button>
 
-    <div id="searchOutput"></div>
+    <div class="newBeersSuggestions">
+
+      <div class="list card eachBeerCard" ng-repeat="(key, beer) in someBrews">
+
+        <div class="item item-avatar beerRatingCard p-0" id="{{beer.id}}" ng-click="toggleBigCard($event)">
+          <img src={{beer.labels.icon}}>
+          <div class="center-text beerName" id="name--{{beer.id}}">{{beer.name}}</div>
+          <div class="center-text">{{beer.style.shortName}}</div>
+          <div class="ratingOutputDiv">
+            <div data-beer-rating="{{beer.id}}" class="ratingOutput center-text">{{beerRating}}</div>
+          </div>
+        </div>
+
+        <div class="dropdownCard">
+          <div class="dropdownDescription">
+            {{beer.description}}
+          </div>
+          <div class="list rangeRater">
+            <div class="item range range-positive">
+              <i class="icon ion-thumbsdown" ng-click="addOrEdit($event, '{{beer.id}}')"></i>
+              <input class="slide userRateRangeInput" type="range" name="beerRating" step="5" min="0" max="100" value="0" id="beerRatingRange"
+                ng-model="beerRating">
+              <i class="icon ion-thumbsup" ng-click="addOrEdit($event, '{{beer.id}}')"></i>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
   </ion-content>
 </ion-view>

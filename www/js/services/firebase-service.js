@@ -8,6 +8,16 @@ let FirebaseService = function ($http, $window, FireKey) {
         firebase.initializeApp(config);
     };
 
+    let unratedBeers;
+
+    const setUnratedBeers = function(beers) {
+        unratedBeers = beers;
+    };
+
+    const getUnratedBeers = function() {
+        return unratedBeers;
+    };
+
     // *****************************************************************************
     // Keep track of beers the viewer is currently viewing and rating to hold data
     // *****************************************************************************
@@ -105,7 +115,35 @@ let FirebaseService = function ($http, $window, FireKey) {
         ref.update({rating: beerRating});
     };
 
-    return { initializeFirebase, getUsers, addUsertoNode, pushInitialBeers, getRegisterBeerList, setCurrentlyViewedBeers, getCurrentlyViewedBeers, rateBeers, getUsersBeers, editBeerRating };
+    const addSuggestedBeerToUserFirebase = function(beerObj) {
+        console.log('beerObj', beerObj);
+        let localUser = $window.localStorage.getItem('uglyID');
+        firebase.database().ref(`users/${localUser}/beers`).update(beerObj);
+    };
+
+    // JUST USED IF RATE LIMIT REACHED
+
+    const pushTestListToFirebase = function(response) {
+        $http.post(`https://brews-clues-a07a1.firebaseio.com/testList/.json`, response)
+        .then((data) => {
+            console.log("data", data);
+        })
+        .catch((error) => {
+            console.log("error", error);
+        }); 
+    };
+
+    const getTestListFromFirebase = function() {
+        return $http.get(`https://brews-clues-a07a1.firebaseio.com/testList/.json`)
+        .then((response) => {
+            return response;
+        })
+        .catch((error) => {
+            console.log('error', error);
+        });
+    };
+
+    return { initializeFirebase, getUsers, addUsertoNode, pushInitialBeers, getRegisterBeerList, setCurrentlyViewedBeers, getCurrentlyViewedBeers, rateBeers, getUsersBeers, editBeerRating, pushTestListToFirebase, getTestListFromFirebase, addSuggestedBeerToUserFirebase, setUnratedBeers, getUnratedBeers };
 
 };
 
