@@ -24,7 +24,7 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
         // let setupUnratedBeers = 'KhYQ9T\nL3Juq0\n5WWDVq\nksF9st\nsiPwY9\nOwh80E\niwiRoK\ncG6leo\nChfN0e\neke8de\nfdaHy4\nH61Gte\nBon4k4';
         // let setupAllBeers = 'fu2qgB\nZoBIHx\naMyzLn\ns5lxSd\nsCgeAO\nuzOl1k\nd9iNtl\nIH5ajM\n1RvWY5\ncdkpyx\nKhYQ9T\nL3Juq0\n5WWDVq\nksF9st\nsiPwY9\nOwh80E\niwiRoK\nChfN0e\neke8de\nfdaHy4\nH61Gte\nBon4k4';
 
-        $window.localStorage.setItem('listIDs', 'fu2qgB\nZoBIHx\naMyzLn\ns5lxSd\nsCgeAO\nuzOl1k\nd9iNtl\nIH5ajM\n1RvWY5\ncdkpyx\nKhYQ9T\nL3Juq0\n5WWDVq\nksF9st\nsiPwY9\nOwh80E\niwiRoK\nChfN0e\neke8de\nfdaHy4\nH61Gte\nBon4k4');
+        // $window.localStorage.setItem('listIDs', 'fu2qgB\nZoBIHx\naMyzLn\ns5lxSd\nsCgeAO\nuzOl1k\nd9iNtl\nIH5ajM\n1RvWY5\ncdkpyx\nKhYQ9T\nL3Juq0\n5WWDVq\nksF9st\nsiPwY9\nOwh80E\niwiRoK\nChfN0e\neke8de\nfdaHy4\nH61Gte\nBon4k4');
 
         let setupAllBeers = $window.localStorage.getItem('listIDs');
 
@@ -112,14 +112,9 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
                     obj[item.id] = item;
                     return obj;
                 }, {});
-                
-                FirebaseService.brokenTesterBefore();
+
                 
                 let onlyTestParams = onlyTestParamsFunction(singleObj, false);
-                
-                FirebaseService.brokenTesterAfter();
-
-                console.log('how many times??????');
                 
                 resolve(onlyTestParams);
             });
@@ -136,12 +131,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
             let oneBeer = singleObj[item];
             onlyTestParams[keys[index]] = {};
         });
-        
-        if (status === false) {
-            console.log('onlyTestParamsPartDuo', onlyTestParams);
-            console.log('status', status);
-        }
-
         
         // Get only necessarry calculation info from each beer
         
@@ -182,12 +171,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
             }
             
         });
-
-        if (status === false) {
-            console.log('whereImTesting', onlyTestParams);
-            FirebaseService.brokenTesterBefore();
-
-        }
 
         return onlyTestParams;
     };
