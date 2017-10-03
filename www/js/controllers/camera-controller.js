@@ -33,6 +33,8 @@ let CameraController = function ($scope, $state, $window, $timeout, $cordovaBarc
         .then((data) => {
             let beers = data.text;
 
+            $window.localStorage.removeItem('listIDs');
+
             $window.localStorage.setItem('listIDs', beers);
 
             $timeout(function() {
