@@ -26,8 +26,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
 
         let setupAllBeers = $window.localStorage.getItem('listIDs');
 
-        console.log('setupAllBeers', setupAllBeers);
-
         // Split string by carriage return
         let split = setupAllBeers.split('\n');
 
