@@ -116,6 +116,7 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
                 let onlyTestParams = onlyTestParamsFunction(singleObj, false);
                 
                 
+                FirebaseService.brokenTester();
                 resolve(onlyTestParams);
             });
         });
@@ -174,7 +175,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
             }
             
         });
-        FirebaseService.brokenTester();
         return onlyTestParams;
     };
     
