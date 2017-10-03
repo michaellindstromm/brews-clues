@@ -66,9 +66,10 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
         
         $scope.beerSuggestions = '';
 
-        if ($window.localStorage.getItem('listIDs') !== null) {
+        if ($window.localStorage.getItem('listIDs') === null) {
             $ionicLoading.hide();
             $scope.firstLogin = true;
+
         } else {
             FirebaseService.getUsersBeers()
             .then((response) => {
