@@ -115,8 +115,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
                 
                 let onlyTestParams = onlyTestParamsFunction(singleObj, false);
                 
-                console.log('onlyTestParams', onlyTestParams);
-                
                 
                 resolve(onlyTestParams);
             });
@@ -125,7 +123,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
     
     const onlyTestParamsFunction = function(singleObj, status) {
         // Create obj with user beer's id's as keys
-        FirebaseService.brokenTester();
         
         let onlyTestParams = {};
         
@@ -134,6 +131,10 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
             let oneBeer = singleObj[item];
             onlyTestParams[keys[index]] = {};
         });
+        
+        console.log('onlyTestParamsPartDuo', onlyTestParams);
+        console.log('status', status);
+        FirebaseService.brokenTester();
         
         // Get only necessarry calculation info from each beer
         
