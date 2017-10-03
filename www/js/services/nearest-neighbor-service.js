@@ -134,7 +134,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
         
         console.log('onlyTestParamsPartDuo', onlyTestParams);
         console.log('status', status);
-        FirebaseService.brokenTester();
         
         // Get only necessarry calculation info from each beer
         
@@ -173,11 +172,12 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
             if (status) {
                 onlyTestParams[keys[index]].rating = oneBeer.rating;
             }
-
+            
         });
+        FirebaseService.brokenTester();
         return onlyTestParams;
     };
-
+    
     const normalizeUnratedBeers = function(rated, unrated) {
         let params = ['ibu', 'abv', 'srm', 'ogMin', 'fgAvg'];
         let arraySortable = [];
