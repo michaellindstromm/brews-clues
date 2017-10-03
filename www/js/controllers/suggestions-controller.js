@@ -110,10 +110,11 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
                     
                     let suggestions = NearestNeighborService.getSuggestions(eucVals);
                     
-                    let unratedBeersToShow = NearestNeighborService.createSuggestedBeersObject(suggestions, unratedBeers);
-                    
                     $ionicLoading.hide();
                     
+                    let unratedBeersToShow = NearestNeighborService.createSuggestedBeersObject(suggestions, unratedBeers);
+                    
+
                     let keys = Object.keys(unratedBeersToShow);
                     $(keys).each((index, item) => {
                         if (unratedBeersToShow[item].labels === undefined) {
