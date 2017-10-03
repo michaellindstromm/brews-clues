@@ -113,6 +113,8 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
     
                let onlyTestParams = onlyTestParamsFunction(singleObj, false);
 
+               console.log('onlyTestParams', onlyTestParams);
+
                resolve(onlyTestParams);
             });
         });
