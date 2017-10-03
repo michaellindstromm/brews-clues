@@ -35,7 +35,10 @@ let CameraController = function ($scope, $state, $window, $timeout, $cordovaBarc
 
             $window.localStorage.setItem('listIDs', beers);
 
-            $state.go('app.brews.suggestions');
+            $timeout(function() {
+                $state.go('app.brews.suggestions');
+
+            }, 50);
         })
         .catch((error) => {
             console.log("error", error);
