@@ -78,90 +78,90 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
 
     
     const getUnratedInfo = function(beers) {
-        FirebaseService.brokenTester();
         return $q((resolve, reject) => {
-
-        
+            
+            
             // ACTUALY CODE!!!!
             let keys = Object.keys(beers);
-
+            
             console.log('please Keys', keys);
-    
+            
             let promises = [];
-    
-           $(keys).each((index, item) => {
+            
+            $(keys).each((index, item) => {
                 let IDs = beers[index];
                 let promise = BeerService.getBeersByID(IDs)
                 .then((data) => {
                     let response = data.data.data;
                     return response;
                 });
-    
+                
                 promises.push(promise);
             });
-
+            
             $q.all(promises).then((response) => {
-    
-            // ARRAY METHODS!
-            // [].concat.apply to reduce from array of arrays to array of elements which are all objects
-               let flatten = [].concat.apply([], response);
-    
-            // array.reduce to create object of objects
-               let singleObj = flatten.reduce((obj, item) => {
-                   console.log('item', item);
-                   obj[item.id] = item;
-                   return obj;
-               }, {});
-    
-    
-               let onlyTestParams = onlyTestParamsFunction(singleObj, false);
-
-               console.log('onlyTestParams', onlyTestParams);
-
-
-               resolve(onlyTestParams);
+                
+                // ARRAY METHODS!
+                // [].concat.apply to reduce from array of arrays to array of elements which are all objects
+                let flatten = [].concat.apply([], response);
+                
+                // array.reduce to create object of objects
+                let singleObj = flatten.reduce((obj, item) => {
+                    console.log('item', item);
+                    obj[item.id] = item;
+                    return obj;
+                }, {});
+                
+                
+                let onlyTestParams = onlyTestParamsFunction(singleObj, false);
+                
+                console.log('onlyTestParams', onlyTestParams);
+                
+                
+                resolve(onlyTestParams);
             });
         });
     };
-
+    
     const onlyTestParamsFunction = function(singleObj, status) {
         // Create obj with user beer's id's as keys
-
+        FirebaseService.brokenTester();
+        
         let onlyTestParams = {};
-
+        
         let keys = Object.keys(singleObj);
         $(keys).each((index, item) => {
             let oneBeer = singleObj[item];
             onlyTestParams[keys[index]] = {};
         });
-
+        
         // Get only necessarry calculation info from each beer
-
+        
         $(keys).each((index, item) => {
             let oneBeer = singleObj[item];
-
+            
             if (oneBeer.ibu === undefined) {
                 let styleAvgIbu = (Number(oneBeer.style.ibuMax) + Number(oneBeer.style.ibuMin)) / 2;
                 onlyTestParams[keys[index]].ibu = styleAvgIbu;
             } else {
                 onlyTestParams[keys[index]].ibu = Number(oneBeer.ibu);
             }
-
+            
             if (oneBeer.abv === undefined) {
                 let styleAvgAbv = (Number(oneBeer.style.abvMax) + Number(oneBeer.style.abvMin)) / 2;
                 onlyTestParams[keys[index]].abv = styleAvgAbv;
             } else {
                 onlyTestParams[keys[index]].abv = Number(oneBeer.abv);
             }
-
+            
             if (oneBeer.srmId === undefined) {
                 onlyTestParams[keys[index]].srm = (Number(oneBeer.style.srmMin) + Number(oneBeer.style.srmMax)) / 2;
             } else {
                 onlyTestParams[keys[index]].srm = Number(oneBeer.srmId);
             }
-
+            
             let fgAvg = ((Number(oneBeer.style.fgMax) + Number(oneBeer.style.fgMin)) / 2).toFixed(3);
-
+            
             onlyTestParams[keys[index]].ogMin = Number(oneBeer.style.ogMin);
             onlyTestParams[keys[index]].fgAvg = Number(fgAvg);
             onlyTestParams[keys[index]].id = keys[index];
