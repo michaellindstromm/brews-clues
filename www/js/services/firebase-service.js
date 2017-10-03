@@ -118,6 +118,13 @@ let FirebaseService = function ($http, $window, FireKey) {
 
     const addSuggestedBeerToUserFirebase = function(beerObj) {
         console.log('beerObj', beerObj);
+        let keys = Object.keys(beerObj);
+        console.log('theseKeys', keys);
+        console.log('beerToAdd', beerObj[keys[0]].description);
+        if (beerObj[keys[0]].description === undefined) {
+            beerObj[keys[0]].description = "No Description Provided.";
+        }
+        console.log('beerObj', beerObj);
         let localUser = $window.localStorage.getItem('uglyID');
         firebase.database().ref(`users/${localUser}/beers`).update(beerObj);
     };

@@ -1,14 +1,21 @@
 let SuggestionsController = function ($scope, $window, $ionicLoading, BeerService, FirebaseService, NearestNeighborService) {
     $scope.isLoaded = false;
 
+    $scope.firstLogin = false;
+
     $scope.$on('$ionicView.beforeEnter', function () {
         
         
         $scope.addOrEdit = ($event, id) => {
+
             FirebaseService.getUsersBeers()
             .then((data) => {
                 let userBeers = data.data;
                 let keys = Object.keys(userBeers);
+                console.log('keys', keys);
+                console.log('target', $event.currentTarget);
+                let thumb = $event.currentTarget;
+                $(thumb).css('color', 'blue');
                 if (keys.indexOf(id) === -1) {
                     let beerObj = {};
                     let unrated = FirebaseService.getUnratedBeers();
@@ -59,8 +66,9 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
         
         $scope.beerSuggestions = '';
 
-        if ($window.localStorage.getItem('listIDs') === null) {
+        if ($window.localStorage.getItem('listIDs') !== null) {
             $ionicLoading.hide();
+            $scope.firstLogin = true;
         } else {
             FirebaseService.getUsersBeers()
             .then((response) => {
@@ -86,6 +94,7 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
                 // Get unrated beers correct test params info
                 NearestNeighborService.getUnratedInfo(IDs)
                 .then((unratedBeers) => {
+
                     FirebaseService.setUnratedBeers(unratedBeers);
     
                     let normalizedUnrated = NearestNeighborService.normalizeUnratedBeers(ratedBeers, unratedBeers);

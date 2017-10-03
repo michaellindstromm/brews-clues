@@ -22,9 +22,9 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
         // This first part is just setup for testing. Will get a string from QR Code that will look like setupAllBeers.
         // let setupAlreadyRatedBeers = 'fu2qgB\nZoBIHx\naMyzLn\ns5lxSd\nsCgeAO\nuzOl1k\nd9iNtl\nIH5ajM\n1RvWY5\ncdkpyx';
         // let setupUnratedBeers = 'KhYQ9T\nL3Juq0\n5WWDVq\nksF9st\nsiPwY9\nOwh80E\niwiRoK\ncG6leo\nChfN0e\neke8de\nfdaHy4\nH61Gte\nBon4k4';
-        // let setupAllBeers = 'fu2qgB\nZoBIHx\naMyzLn\ns5lxSd\nsCgeAO\nuzOl1k\nd9iNtl\nIH5ajM\n1RvWY5\ncdkpyx\nKhYQ9T\nL3Juq0\n5WWDVq\nksF9st\nsiPwY9\nOwh80E\niwiRoK\nChfN0e\neke8de\nfdaHy4\nH61Gte\nBon4k4';
+        let setupAllBeers = 'fu2qgB\nZoBIHx\naMyzLn\ns5lxSd\nsCgeAO\nuzOl1k\nd9iNtl\nIH5ajM\n1RvWY5\ncdkpyx\nKhYQ9T\nL3Juq0\n5WWDVq\nksF9st\nsiPwY9\nOwh80E\niwiRoK\nChfN0e\neke8de\nfdaHy4\nH61Gte\nBon4k4';
 
-        let setupAllBeers = $window.localStorage.getItem('listIDs');
+        // let setupAllBeers = $window.localStorage.getItem('listIDs');
 
         // Split string by carriage return
         let split = setupAllBeers.split('\n');
@@ -147,7 +147,7 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
             }
 
             if (oneBeer.srmId === undefined) {
-                onlyTestParams[keys[index]].srm = Number(oneBeer.style.srmMin);
+                onlyTestParams[keys[index]].srm = (Number(oneBeer.style.srmMin) + Number(oneBeer.style.srmMax)) / 2;
             } else {
                 onlyTestParams[keys[index]].srm = Number(oneBeer.srmId);
             }
@@ -390,6 +390,7 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
 
             for (var j = 0; j < ratedList.length; j++) {
                 var ratedBeer = ratedList[j];
+                console.log('ratedBeer', ratedBeer);
 
                 let ibuDelta = Math.pow((unratedBeer[0] - ratedBeer[0]), 2);
                 let abvDelta = Math.pow((unratedBeer[1] - ratedBeer[1]), 2);
@@ -398,11 +399,12 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
                 let fgMinDelta = Math.pow((unratedBeer[4] - ratedBeer[4]), 2);
 
                 let sum = ibuDelta + abvDelta + srmDelta + ogMinDelta + fgMinDelta;
-                let euclideanVal = Math.sqrt(sum);
+                let euclideanVal = Math.sqrt(sum) + ratedBeer[7]*0.1;
 
 
 
-                 euclideanValsArr.push({ratedBeer: ratedBeer[5], unratedBeer: unratedBeer[5], eucVal: euclideanVal});
+
+                 euclideanValsArr.push({ratedBeer: ratedBeer[5], unratedBeer: unratedBeer[5], eucVal: euclideanVal, name: unratedBeer[6], checkedAgainst: ratedBeer[6], rating: ratedBeer[7]});
                 
                 
             }
@@ -413,6 +415,8 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
         });
 
         holderArray.push(onListIDs, euclideanValsArr);
+
+        console.log('holdArr', holderArray);
         
         return holderArray;
     };
@@ -420,37 +424,50 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
     const getSuggestions = function(valArray) {
 
         let suggestionsArray = [];
+        let suggestionsArrayID = [];
 
         let alreadyOnListIDs = valArray[0];
         let comparisonVals = valArray[1];
 
+        console.log('alreadOnListIDs', alreadyOnListIDs);
+        console.log('comparisonVals', comparisonVals);
 
         for (var i = 0; i < comparisonVals.length; i++) {
             var element = comparisonVals[i];
+            console.log('element', element.unratedBeer);
             if (suggestionsArray.length < 5 ) {
-                if (alreadyOnListIDs.indexOf(element.ratedBeer) === -1 && suggestionsArray.indexOf(element.unratedBeer) === -1) {
-                    suggestionsArray.push(element.unratedBeer);
+                console.log('suggestionsArray', suggestionsArray);
+                if (alreadyOnListIDs.indexOf(element.unratedBeer) === -1 && suggestionsArrayID.indexOf(element.unratedBeer) === -1) {
+                    suggestionsArrayID.push(element.unratedBeer);
+                    suggestionsArray.push(element);
                 }
             } else {
                 break;
             }
         }
 
-        console.log('suggestionsArray', suggestionsArray);
+        console.log('suggestionsArrayFinally', suggestionsArray);
         return suggestionsArray;
 
     };
 
     const createSuggestedBeersObject = function(suggestions, unratedBeers) {
-        console.log('suggestionsController', suggestions);
+        console.log('suggestions', suggestions);
         console.log('unratedBeers', unratedBeers);
+        
+        let suggestionsIDs = [];
+
+        for (var index = 0; index < suggestions.length; index++) {
+            var element = suggestions[index];
+            suggestionsIDs.push(element.unratedBeer);
+        }
 
         let beerObj = {};
 
         let keys = Object.keys(unratedBeers);
         $(keys).each((index, item) => {
             let beer = unratedBeers[item];
-            if (suggestions.indexOf(beer.id) !== -1) {
+            if (suggestionsIDs.indexOf(beer.id) !== -1) {
                 beerObj[beer.id] = beer;
             }
         });

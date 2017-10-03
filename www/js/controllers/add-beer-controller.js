@@ -39,6 +39,11 @@ let AddBeerController = function ($scope, BeerService, FirebaseService) {
 
                     console.log('data', data.data);
                     console.log('current Beers', currentBeers);
+
+                    console.log('target', $event.currentTarget);
+                    let thumb = $event.currentTarget;
+                    $(thumb).css('color', 'blue');
+                    
                     let userBeers = data.data;
                     let keys = Object.keys(userBeers);
                     if (keys.indexOf(id) === -1) {

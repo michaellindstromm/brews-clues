@@ -171,3 +171,8 @@ input {
     box-shadow: 1px 2px #ddd !important;
 }
 
+.addOrEditSuccess {
+    box-shadow: 2px 2px 2px green !important;
+    transition: box-shadow .5s ease-in-out;
+}
+
