@@ -83,6 +83,8 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
         
             // ACTUALY CODE!!!!
             let keys = Object.keys(beers);
+
+            console.log('please Keys', keys);
     
             let promises = [];
     
@@ -114,6 +116,8 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
                let onlyTestParams = onlyTestParamsFunction(singleObj, false);
 
                console.log('onlyTestParams', onlyTestParams);
+
+               FirebaseService.brokenTester();
 
                resolve(onlyTestParams);
             });
