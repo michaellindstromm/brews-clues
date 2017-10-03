@@ -38,7 +38,7 @@ let CameraController = function ($scope, $state, $window, $timeout, $cordovaBarc
             $timeout(function() {
                 $state.go('app.brews.suggestions');
 
-            }, 50);
+            }, 500);
         })
         .catch((error) => {
             console.log("error", error);
