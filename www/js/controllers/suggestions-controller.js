@@ -95,14 +95,13 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
                 // Get correct Test Params for comparison
                 let ratedBeers = NearestNeighborService.onlyTestParamsFunction(allMyBeers, true);
                 
-                $ionicLoading.hide();
                 
                 // Get unrated beers correct test params info
                 NearestNeighborService.getUnratedInfo(IDs)
                 .then((unratedBeers) => {
-
+                    
                     FirebaseService.setUnratedBeers(unratedBeers);
-    
+                    
                     let normalizedUnrated = NearestNeighborService.normalizeUnratedBeers(ratedBeers, unratedBeers);
                     
                     let normalizedRated = NearestNeighborService.normalizeRatedBeers(ratedBeers);
@@ -112,6 +111,8 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
                     let suggestions = NearestNeighborService.getSuggestions(eucVals);
                     
                     let unratedBeersToShow = NearestNeighborService.createSuggestedBeersObject(suggestions, unratedBeers);
+                    
+                    $ionicLoading.hide();
                     
                     let keys = Object.keys(unratedBeersToShow);
                     $(keys).each((index, item) => {
