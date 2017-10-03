@@ -105,13 +105,13 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
                 // [].concat.apply to reduce from array of arrays to array of elements which are all objects
                 let flatten = [].concat.apply([], response);
                 
+                FirebaseService.brokenTesterBefore();
                 // array.reduce to create object of objects
                 let singleObj = flatten.reduce((obj, item) => {
                     obj[item.id] = item;
                     return obj;
                 }, {});
                 
-                FirebaseService.brokenTesterBefore();
                 
                 let onlyTestParams = onlyTestParamsFunction(singleObj, false);
                 
