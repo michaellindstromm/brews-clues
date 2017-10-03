@@ -78,6 +78,7 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
 
     
     const getUnratedInfo = function(beers) {
+        FirebaseService.brokenTester();
         return $q((resolve, reject) => {
 
         
@@ -112,7 +113,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
                    return obj;
                }, {});
     
-               FirebaseService.brokenTester();
     
                let onlyTestParams = onlyTestParamsFunction(singleObj, false);
 
