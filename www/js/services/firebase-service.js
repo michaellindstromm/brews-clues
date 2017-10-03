@@ -151,12 +151,17 @@ let FirebaseService = function ($http, $window, FireKey) {
         });
     };
 
-    const brokenTester = function() {
+    const brokenTesterBefore = function() {
         let localUser = $window.localStorage.getItem('uglyID');
-        firebase.database().ref().push({true: 'true'});
+        firebase.database().ref().push({before: 'before'});
     }
 
-    return { initializeFirebase, getUsers, addUsertoNode, pushInitialBeers, getRegisterBeerList, setCurrentlyViewedBeers, getCurrentlyViewedBeers, rateBeers, getUsersBeers, editBeerRating, pushTestListToFirebase, getTestListFromFirebase, addSuggestedBeerToUserFirebase, setUnratedBeers, getUnratedBeers, brokenTester };
+    const brokenTesterAfter = function () {
+        let localUser = $window.localStorage.getItem('uglyID');
+        firebase.database().ref().push({ after: 'after' });
+    }
+
+    return { initializeFirebase, getUsers, addUsertoNode, pushInitialBeers, getRegisterBeerList, setCurrentlyViewedBeers, getCurrentlyViewedBeers, rateBeers, getUsersBeers, editBeerRating, pushTestListToFirebase, getTestListFromFirebase, addSuggestedBeerToUserFirebase, setUnratedBeers, getUnratedBeers, brokenTesterBefore, brokenTesterAfter };
 
 };
 

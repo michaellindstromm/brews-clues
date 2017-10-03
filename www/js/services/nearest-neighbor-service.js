@@ -100,7 +100,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
             });
             
             $q.all(promises).then((response) => {
-                FirebaseService.brokenTester();
                 
                 // ARRAY METHODS!
                 // [].concat.apply to reduce from array of arrays to array of elements which are all objects
@@ -112,9 +111,12 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
                     return obj;
                 }, {});
                 
+                FirebaseService.brokenTesterBefore();
                 
                 let onlyTestParams = onlyTestParamsFunction(singleObj, false);
                 
+                FirebaseService.brokenTesterAfter();
+
                 console.log('how many times??????');
                 
                 resolve(onlyTestParams);
@@ -181,6 +183,7 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
 
         if (status === false) {
             console.log('whereImTesting', onlyTestParams);
+            FirebaseService.brokenTesterBefore();
 
         }
 
