@@ -112,12 +112,12 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
                    return obj;
                }, {});
     
+               FirebaseService.brokenTester();
     
                let onlyTestParams = onlyTestParamsFunction(singleObj, false);
 
                console.log('onlyTestParams', onlyTestParams);
 
-               FirebaseService.brokenTester();
 
                resolve(onlyTestParams);
             });
