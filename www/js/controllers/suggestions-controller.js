@@ -82,6 +82,8 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
                 
                 // Split b/w unrated and already rated beers
                 let split = NearestNeighborService.splitUnratedAndRated(allMyBeers);
+
+                $ionicLoading.hide();
                 
                 // IDs = all of the unrated beers
                 let IDs = split[0];
@@ -131,7 +133,6 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
                     
                     $scope.myBrews = top5RatedOnList;
                     $scope.someBrews = unratedBeersToShow;
-                    $ionicLoading.hide();
     
     
                 });
