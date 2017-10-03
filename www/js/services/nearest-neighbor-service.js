@@ -99,7 +99,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
                 promises.push(promise);
             });
             
-            FirebaseService.brokenTester();
             $q.all(promises).then((response) => {
                 
                 // ARRAY METHODS!
@@ -112,6 +111,7 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
                     return obj;
                 }, {});
                 
+                FirebaseService.brokenTester();
                 
                 let onlyTestParams = onlyTestParamsFunction(singleObj, false);
                 
