@@ -24,6 +24,8 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
         // let setupUnratedBeers = 'KhYQ9T\nL3Juq0\n5WWDVq\nksF9st\nsiPwY9\nOwh80E\niwiRoK\ncG6leo\nChfN0e\neke8de\nfdaHy4\nH61Gte\nBon4k4';
         // let setupAllBeers = 'fu2qgB\nZoBIHx\naMyzLn\ns5lxSd\nsCgeAO\nuzOl1k\nd9iNtl\nIH5ajM\n1RvWY5\ncdkpyx\nKhYQ9T\nL3Juq0\n5WWDVq\nksF9st\nsiPwY9\nOwh80E\niwiRoK\nChfN0e\neke8de\nfdaHy4\nH61Gte\nBon4k4';
 
+        $window.localStorage.setItem('listIDs', 'fu2qgB\nZoBIHx\naMyzLn\ns5lxSd\nsCgeAO\nuzOl1k\nd9iNtl\nIH5ajM\n1RvWY5\ncdkpyx\nKhYQ9T\nL3Juq0\n5WWDVq\nksF9st\nsiPwY9\nOwh80E\niwiRoK\nChfN0e\neke8de\nfdaHy4\nH61Gte\nBon4k4');
+
         let setupAllBeers = $window.localStorage.getItem('listIDs');
 
         // Split string by carriage return
