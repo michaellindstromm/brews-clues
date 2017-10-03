@@ -99,6 +99,7 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
                 promises.push(promise);
             });
             
+            FirebaseService.brokenTester();
             $q.all(promises).then((response) => {
                 
                 // ARRAY METHODS!
@@ -107,7 +108,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
                 
                 // array.reduce to create object of objects
                 let singleObj = flatten.reduce((obj, item) => {
-                    console.log('item', item);
                     obj[item.id] = item;
                     return obj;
                 }, {});
@@ -115,8 +115,8 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
                 
                 let onlyTestParams = onlyTestParamsFunction(singleObj, false);
                 
+                console.log('how many times??????');
                 
-                FirebaseService.brokenTester();
                 resolve(onlyTestParams);
             });
         });
@@ -133,8 +133,11 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
             onlyTestParams[keys[index]] = {};
         });
         
-        console.log('onlyTestParamsPartDuo', onlyTestParams);
-        console.log('status', status);
+        if (status === false) {
+            console.log('onlyTestParamsPartDuo', onlyTestParams);
+            console.log('status', status);
+        }
+
         
         // Get only necessarry calculation info from each beer
         
@@ -175,6 +178,12 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
             }
             
         });
+
+        if (status === false) {
+            console.log('whereImTesting', onlyTestParams);
+
+        }
+
         return onlyTestParams;
     };
     
@@ -399,7 +408,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
 
             for (var j = 0; j < ratedList.length; j++) {
                 var ratedBeer = ratedList[j];
-                console.log('ratedBeer', ratedBeer);
 
                 let ibuDelta = Math.pow((unratedBeer[0] - ratedBeer[0]), 2);
                 let abvDelta = Math.pow((unratedBeer[1] - ratedBeer[1]), 2);
@@ -425,7 +433,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
 
         holderArray.push(onListIDs, euclideanValsArr);
 
-        console.log('holdArr', holderArray);
         
         return holderArray;
     };
@@ -438,14 +445,10 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
         let alreadyOnListIDs = valArray[0];
         let comparisonVals = valArray[1];
 
-        console.log('alreadOnListIDs', alreadyOnListIDs);
-        console.log('comparisonVals', comparisonVals);
 
         for (var i = 0; i < comparisonVals.length; i++) {
             var element = comparisonVals[i];
-            console.log('element', element.unratedBeer);
             if (suggestionsArray.length < 5 ) {
-                console.log('suggestionsArray', suggestionsArray);
                 if (alreadyOnListIDs.indexOf(element.unratedBeer) === -1 && suggestionsArrayID.indexOf(element.unratedBeer) === -1) {
                     suggestionsArrayID.push(element.unratedBeer);
                     suggestionsArray.push(element);
@@ -455,14 +458,11 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
             }
         }
 
-        console.log('suggestionsArrayFinally', suggestionsArray);
         return suggestionsArray;
 
     };
 
     const createSuggestedBeersObject = function(suggestions, unratedBeers) {
-        console.log('suggestions', suggestions);
-        console.log('unratedBeers', unratedBeers);
         
         let suggestionsIDs = [];
 
@@ -481,7 +481,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
             }
         });
 
-        console.log('beerObj', beerObj);
         return beerObj;
     };
     
