@@ -100,6 +100,7 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
             });
             
             $q.all(promises).then((response) => {
+                FirebaseService.brokenTester();
                 
                 // ARRAY METHODS!
                 // [].concat.apply to reduce from array of arrays to array of elements which are all objects
@@ -111,7 +112,6 @@ let NearestNeighborService = function($timeout, $window, $q, FirebaseService, Be
                     return obj;
                 }, {});
                 
-                FirebaseService.brokenTester();
                 
                 let onlyTestParams = onlyTestParamsFunction(singleObj, false);
                 
