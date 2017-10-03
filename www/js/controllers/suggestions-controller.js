@@ -102,6 +102,8 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
                     
                     FirebaseService.setUnratedBeers(unratedBeers);
                     
+                    $ionicLoading.hide();
+                    
                     let normalizedUnrated = NearestNeighborService.normalizeUnratedBeers(ratedBeers, unratedBeers);
                     
                     let normalizedRated = NearestNeighborService.normalizeRatedBeers(ratedBeers);
@@ -110,7 +112,6 @@ let SuggestionsController = function ($scope, $window, $ionicLoading, BeerServic
                     
                     let suggestions = NearestNeighborService.getSuggestions(eucVals);
                     
-                    $ionicLoading.hide();
                     
                     let unratedBeersToShow = NearestNeighborService.createSuggestedBeersObject(suggestions, unratedBeers);
                     
