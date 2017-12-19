@@ -1,5 +1,4 @@
 # Brews Clues
-==============
 
 Brews Clues is an app built to help beer consumers make choices about which beer they should drink next. The app was built using AngularJS, Ionic1, and Firebase. Upon first use, users register and then rate a preselected list of beers in order to create a baseline rating of different types of beers. All beer information is obtained from the BreweryDB API. Using a custom kNN (k Nearest Neighbors) formula, users scan a QR Code which contains a menu of beers. After scanning, beers on the menu are compared to beers users have already rated, and information is passed through the formula to give the users five beer suggestions from the menu.
 
