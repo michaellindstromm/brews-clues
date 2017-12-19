@@ -32,7 +32,7 @@ cd www/
 Start up a local server and you are good to go!
 
 **Note: This app is intended to run natively. Using the barcode scanner will only work when the app is run natively. For native access email me at:**
-[michaellindstr@gmail.com](michaellindstr@gmail.com)
+michaellindstr@gmail.com
 
 ---
 
@@ -46,4 +46,4 @@ Start up a local server and you are good to go!
 ## Live
 
 **For native access email me at:**
-[michaellindstr@gmail.com](michaellindstr@gmail.com)
+michaellindstr@gmail.com
