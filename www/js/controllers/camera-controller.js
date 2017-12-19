@@ -43,10 +43,10 @@ let CameraController = function ($scope, $state, $window, $timeout, $cordovaBarc
             }, 500);
         })
         .catch((error) => {
-            console.log("error", error);
+          $ionicLoading.hide();
         });
     };
-    
+
 };
 
 angular.module('beer').controller('CameraController', CameraController);

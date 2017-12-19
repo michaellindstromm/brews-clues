@@ -1,26 +1,49 @@
-Ionic App Base
+# Brews Clues
 ==============
 
-A starting project for Ionic that optionally supports using custom SCSS.
+Brews Clues is an app built to help beer consumers make choices about which beer they should drink next. The app was built using AngularJS, Ionic1, and Firebase. Upon first use, users register and then rate a preselected list of beers in order to create a baseline rating of different types of beers. All beer information is obtained from the BreweryDB API. Using a custom kNN (k Nearest Neighbors) formula, users scan a QR Code which contains a menu of beers. After scanning, beers on the menu are compared to beers users have already rated, and information is passed through the formula to give the users five beer suggestions from the menu.
 
-## Using this project
+---
 
-We recommend using the [Ionic CLI](https://github.com/ionic-team/ionic-cli) to create new Ionic projects that are based on this project but use a ready-made starter template.
+## Getting Started
 
-For example, to start a new Ionic project with the default tabs interface, make sure the `ionic` utility is installed:
+To access locally simply clone down the repo to your machine.
 
-```bash
-$ npm install -g ionic cordova
+ ```
+ git clone https://github.com/michaellindstromm/brews-clues.git
+ ```
+
+### Installing
+
+Go to root directory of the app.
+```
+cd [wherever you put the app]
 ```
 
-Then run:
-
-```bash
-$ ionic start myProject tabs --type=ionic1
+Bundle install the necessary gems from the Gemfile.
+```
+npm install
 ```
 
-More info on this can be found on the Ionic [Getting Started](https://ionicframework.com/getting-started) page and the [Ionic CLI](https://github.com/ionic-team/ionic-cli) repo.
+```
+cd www/
+```
 
-## Issues
+Start up a local server and you are good to go!
 
-Issues have been disabled on this repo. If you do find an issue or have a question, consider posting it on the [Ionic Forum](https://forum.ionicframework.com/). If there is truly an error, follow our guidelines for [submitting an issue](https://ionicframework.com/submit-issue/) to the main Ionic repository.
+**Note: This app is intended to run natively. Using the barcode scanner will only work when the app is run natively. For native access email me at:**
+[michaellindstr@gmail.com](michaellindstr@gmail.com)
+
+---
+
+## Built With
+
+* [Ionic](https://ionicframework.com/)
+* [AngularJS](https://angularjs.org/)
+* [Firebase](https://firebase.google.com/)
+
+
+## Live
+
+**For native access email me at:**
+[michaellindstr@gmail.com](michaellindstr@gmail.com)
